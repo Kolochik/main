@@ -34,10 +34,18 @@
             100% { background-position: 0% 50%; }
         }
 
-        p {
+        .animated-text {
             font-size: 24px;
             margin: 20px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(45deg, #00ff7f, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-animation 5s linear infinite;
+        }
+
+        @keyframes text-animation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .button {
@@ -49,8 +57,8 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            margin: 20px auto; /* Центрируем кнопку */
-            display: inline-block; /* Делаем кнопку блочным элементом для изменения размеров */
+            margin: 20px auto;
+            display: inline-block;
             transition: background 0.3s, transform 0.3s;
         }
 
@@ -67,12 +75,69 @@
             text-align: center;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
+
+        .menu {
+            position: absolute;
+            top: 20px;
+            left: -200px;
+            width: 200px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: left 0.3s;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .menu-toggle div {
+            width: 30px;
+            height: 4px;
+            background-color: white;
+            margin: 5px 0;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="menu" id="sideMenu">
+        <h2>Меню</h2>
+        <a href="#">Ссылка 1</a>
+        <a href="#">Ссылка 2</a>
+        <a href="#">Ссылка 3</a>
+    </div>
+    
     <h1>Mix Vine</h1>
-    <p>Эта страница была сделана за пару секунд, очень простым способом</p>
+    <p class="animated-text">Эта страница была сделана за пару секунд, очень простым способом</p>
     <a href="https://t.me/ZrOrV" class="button">Переход в ТГ</a>
     <footer>Project MixVine® 2024</footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("sideMenu");
+            menu.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
