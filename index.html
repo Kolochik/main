@@ -3,127 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mix Vine</title>
+    <title>YouTube Clone</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://images.wallpaperscraft.ru/image/single/kosmos_zvezdy_tumannost_169826_1024x600.jpg');
-            background-size: cover;
-            color: white;
-            text-align: center;
+            background-color: #181818;
+            color: #fff;
+        }
+        header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #202020;
         }
-
-        h1 {
-            font-size: 48px;
-            margin: 20px 0 0;
-            background: linear-gradient(45deg, #ff6b6b, #f7d94a, #6bff6b, #6bb3ff, #ff6bb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rainbow 5s ease-in-out infinite;
-        }
-
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .animated-text {
-            font-size: 20px;
-            margin: 20px 0;
-            background: linear-gradient(45deg, #00ff7f, #00bfff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: text-animation 5s linear infinite;
-        }
-
-        @keyframes text-animation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        footer {
-            font-size: 12px;
-            position: absolute;
-            bottom: 10px;
-            left: 20px; /* Перемещение влево */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        }
-
-        .version {
-            display: inline-block;
-            margin-right: 10px; /* Отступ между текстами */
-        }
-
-        .menu {
-            position: absolute;
-            top: 20px;
-            left: -200px;
+        nav {
             width: 200px;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            transition: left 0.3s;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .menu.active {
+            background-color: #202020;
+            height: 100vh;
+            position: fixed;
+            top: 0;
             left: 0;
+            padding-top: 60px;
         }
-
-        .menu-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            z-index: 10;
+        nav ul {
+            list-style: none;
+            padding: 0;
         }
-
-        .menu-toggle div {
-            width: 30px;
-            height: 4px;
-            background-color: white;
-            margin: 5px 0;
+        nav ul li {
+            padding: 10px 20px;
         }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            margin: 15px 0;
+        nav ul li:hover {
+            background-color: #383838;
+        }
+        main {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .video-card {
+            background-color: #282828;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: auto;
+        }
+        .video-info {
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div class="menu" id="sideMenu">
-        <h2>Меню</h2>
-        <a href="https://t.me/ZrOrV">Переход в ТГК</a>
-        <a href="https://t.me/kqxsrZ">Переход ко мне в ЛС</a>
-    </div>
-    
-    <h1>Mix Vine</h1>
-    <p class="animated-text">Эта страница была сделана за пару секунд, очень простым способом</p>
-    <footer>
-        <span class="version">Version v0.0.3d</span>
-        2023
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById("sideMenu");
-            menu.classList.toggle("active");
-        }
-    </script>
+    <header>
+        <div>Логотип</div>
+        <div>Поиск</div>
+        <div>Иконки</div>
+    </header>
+    <nav>
+        <ul>
+            <li>Главная</li>
+            <li>Тренды</li>
+            <li>Подписки</li>
+            <li>Библиотека</li>
+        </ul>
+    </nav>
+    <main>
+        <div class="video-card">
+            <img src="video-thumbnail.jpg" alt="Video Thumbnail" class="video-thumbnail">
+            <div class="video-info">
+                <h3>Название видео</h3>
+                <p>Описание видео</p>
+            </div>
+        </div>
+        <!-- Добавьте больше видео-карточек по необходимости -->
+    </main>
 </body>
 </html>
