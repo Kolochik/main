@@ -13,10 +13,11 @@
         }
 
         header {
-            background: #007BFF;
+            background: linear-gradient(90deg, #007BFF, #0056b3);
             color: #fff;
-            padding: 10px 0;
+            padding: 20px 0;
             text-align: center;
+            border-radius: 8px;
         }
 
         main {
@@ -42,6 +43,11 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #007BFF;
         }
 
         button {
@@ -51,6 +57,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         button:hover {
@@ -60,6 +67,7 @@
         footer {
             text-align: center;
             margin-top: 20px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -68,7 +76,7 @@
         <h1>Прием заявлений на специалиста</h1>
     </header>
     <main>
-        <form action="#" method="POST">
+        <form id="applicationForm" action="#" method="POST" enctype="multipart/form-data">
             <label for="name">ФИО:</label>
             <input type="text" id="name" name="name" required>
 
