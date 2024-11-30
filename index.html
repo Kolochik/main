@@ -3,76 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Технологии для бизнеса</title>
+    <title>Mix Vine</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #111;
-            color: #fff;
+            background-image: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
         }
-        header {
-            background-color: #222;
-            padding: 20px;
+        .container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* полупрозрачный черный фон */
+            padding: 20px;
         }
         .logo {
-            font-size: 1.5em;
-            background: linear-gradient(45deg, #ff6b6b, #f0e130);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .cta-button {
-            background-color: #f00;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .hero {
-            padding: 100px 20px;
-            text-align: center;
-            background: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg') no-repeat center center;
-            background-size: cover;
-        }
-        .hero h1 {
-            font-size: 3em;
+            font-size: 2rem;
             margin-bottom: 20px;
         }
-        .hero p {
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 0 auto;
+        .headline {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subheadline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .button {
+            background-color: #ff3366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #ff6699;
+        }
+        .stats {
+            margin-top: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <div class="logo">Mix Vine</div>
-    <nav>
-        <a href="#">Главная</a>
-        <a href="#">О нас</a>
-        <a href="#">Услуги</a>
-        <a href="#">Контакты</a>
-        <a href="#" class="cta-button">Связаться</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h1>Интегрируем современные технологии<br>во внутренние процессы компаний</h1>
-    <p>Повышайте эффективность и оптимизируйте бизнес-процессы, используя инновационные решения.</p>
-</section>
-
+    <div class="container">
+        <div class="logo">Mix Vine</div>
+        <div class="headline">Бот для алгоритмической торговли на Mix Vine</div>
+        <div class="subheadline">Автоматизированная торговая система для создания пассивного дохода</div>
+        <a href="#" class="button">Подписаться</a>
+        <div class="stats">150% доходности в год</div>
+    </div>
 </body>
 </html>
