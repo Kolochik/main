@@ -21,7 +21,7 @@
 
         h1 {
             font-size: 48px;
-            margin: 0;
+            margin: 20px 0 0;
             background: linear-gradient(45deg, #ff6b6b, #f7d94a, #6bff6b, #6bb3ff, #ff6bb3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -35,7 +35,7 @@
         }
 
         .animated-text {
-            font-size: 24px;
+            font-size: 20px;
             margin: 20px 0;
             background: linear-gradient(45deg, #00ff7f, #00bfff);
             -webkit-background-clip: text;
@@ -48,32 +48,17 @@
             100% { background-position: 100% 50%; }
         }
 
-        .button {
-            background: linear-gradient(45deg, #ff6b6b, #f7d94a);
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            margin: 20px auto;
-            display: inline-block;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .button:hover {
-            background: linear-gradient(45deg, #f7d94a, #ff6b6b);
-            transform: scale(1.05);
-        }
-
         footer {
             font-size: 12px;
             position: absolute;
             bottom: 10px;
-            width: 100%;
-            text-align: center;
+            left: 20px; /* Перемещение влево */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .version {
+            display: inline-block;
+            margin-right: 10px; /* Отступ между текстами */
         }
 
         .menu {
@@ -123,15 +108,16 @@
     </div>
     <div class="menu" id="sideMenu">
         <h2>Меню</h2>
-        <a href="#">Ссылка 1</a>
-        <a href="#">Ссылка 2</a>
-        <a href="#">Ссылка 3</a>
+        <a href="https://t.me/ZrOrV">Переход в ТГК</a>
+        <a href="https://t.me/kqxsrZ">Переход ко мне в ЛС</a>
     </div>
     
     <h1>Mix Vine</h1>
     <p class="animated-text">Эта страница была сделана за пару секунд, очень простым способом</p>
-    <a href="https://t.me/ZrOrV" class="button">Переход в ТГ</a>
-    <footer>Project MixVine® 2024</footer>
+    <footer>
+        <span class="version">Version v0.0.3d</span>
+        2023
+    </footer>
 
     <script>
         function toggleMenu() {
