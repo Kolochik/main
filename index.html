@@ -18,6 +18,12 @@
             justify-content: space-between;
             align-items: center;
         }
+        .logo {
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff6b6b, #f0e130);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         nav a {
             color: #fff;
             text-decoration: none;
@@ -36,7 +42,8 @@
         .hero {
             padding: 100px 20px;
             text-align: center;
-            background: linear-gradient(135deg, #333, #222);
+            background: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg') no-repeat center center;
+            background-size: cover;
         }
         .hero h1 {
             font-size: 3em;
@@ -52,7 +59,7 @@
 <body>
 
 <header>
-    <div>Логотип</div>
+    <div class="logo">Mix Vine</div>
     <nav>
         <a href="#">Главная</a>
         <a href="#">О нас</a>
