@@ -22,7 +22,16 @@
         h1 {
             font-size: 48px;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(45deg, #ff6b6b, #f7d94a, #6bff6b, #6bb3ff, #ff6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 5s ease-in-out infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         p {
@@ -32,20 +41,21 @@
         }
 
         .button {
-            background-color: #007bff;
+            background: linear-gradient(45deg, #ff6b6b, #f7d94a);
             color: white;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 10px 20px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
             margin: 20px 0;
-            transition: background-color 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(45deg, #f7d94a, #ff6b6b);
+            transform: scale(1.05);
         }
 
         footer {
