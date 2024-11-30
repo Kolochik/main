@@ -3,144 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аналог Telegram</title>
+    <title>Прием заявлений на специалиста</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-        .sidebar {
-            width: 250px;
-            background-color: #2c3e50;
-            color: white;
             padding: 20px;
         }
-        .chat {
-            flex: 1;
+
+        header {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            background: #fff;
             padding: 20px;
-            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
         }
-        .profile, .chat-selector {
-            display: none;
-        }
-        .profile.active, .chat-selector.active {
-            display: block;
-        }
-        .messages {
-            margin-bottom: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #bdc3c7;
-            padding: 10px;
-            background-color: white;
-        }
-        .message-input {
+
+        form {
             display: flex;
-            margin-top: 20px;
+            flex-direction: column;
         }
-        .message-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
+
+        label {
+            margin-bottom: 5px;
         }
-        .message-input button {
+
+        input, select {
+            margin-bottom: 15px;
             padding: 10px;
-            margin-left: 10px;
-            background-color: #3498db;
-            color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
         }
-        .message-input button:hover {
-            background-color: #2980b9;
+
+        button:hover {
+            background: #0056b3;
         }
-        .profile-input {
-            margin-bottom: 10px;
-        }
-        .close-profile {
-            cursor: pointer;
-            color: red;
-            font-weight: bold;
-            margin-bottom: 10px;
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Чаты</h2>
-            <div class="chat-selector">
-                <button onclick="switchChat(1)">Чат 1</button>
-                <button onclick="switchChat(2)">Чат 2</button>
-            </div>
-            <h2>Профиль</h2>
-            <button onclick="openProfile()">Профиль</button>
-        </div>
-        <div class="chat">
-            <div id="chat1" class="chat-content active">
-                <h2>Чат 1</h2>
-                <div class="messages" id="messages1"></div>
-                <div class="message-input">
-                    <input type="text" id="messageInput1" placeholder="Введите сообщение..." />
-                    <button onclick="sendMessage(1)">Отправить</button>
-                </div>
-            </div>
-            <div id="chat2" class="chat-content">
-                <h2>Чат 2</h2>
-                <div class="messages" id="messages2"></div>
-                <div class="message-input">
-                    <input type="text" id="messageInput2" placeholder="Введите сообщение..." />
-                    <button onclick="sendMessage(2)">Отправить</button>
-                </div>
-            </div>
-            <div id="profile" class="profile">
-                <div class="close-profile" onclick="closeProfile()">✖ Закрыть</div>
-                <h2>Профиль</h2>
-                <input type="text" class="profile-input" id="firstName" placeholder="Имя" />
-                <input type="text" class="profile-input" id="lastName" placeholder="Фамилия" />
-                <input type="text" class="profile-input" id="phone" placeholder="Номер телефона" />
-            </div>
-        </div>
-    </div>
+    <header>
+        <h1>Прием заявлений на специалиста</h1>
+    </header>
+    <main>
+        <form action="#" method="POST">
+            <label for="name">ФИО:</label>
+            <input type="text" id="name" name="name" required>
 
-    <script>
-        function sendMessage(chatNumber) {
-            const messageInput = document.getElementById(`messageInput${chatNumber}`);
-            const messagesDiv = document.getElementById(`messages${chatNumber}`);
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-            if (messageInput.value.trim() !== '') {
-                const message = document.createElement('div');
-                message.textContent = messageInput.value;
-                messagesDiv.appendChild(message);
-                messageInput.value = '';
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Прокручиваем вниз
-            }
-        }
+            <label for="position">Должность:</label>
+            <select id="position" name="position" required>
+                <option value="developer">Разработчик</option>
+                <option value="designer">Дизайнер</option>
+                <option value="manager">Менеджер</option>
+            </select>
 
-        function switchChat(chatNumber) {
-            const chats = document.querySelectorAll('.chat-content');
-            chats.forEach(chat => chat.classList.remove('active'));
-            document.getElementById(`chat${chatNumber}`).classList.add('active');
-        }
+            <label for="resume">Резюме:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
 
-        function openProfile() {
-            document.getElementById('profile').classList.add('active');
-            const chats = document.querySelectorAll('.chat-content');
-            chats.forEach(chat => chat.classList.remove('active'));
-        }
-
-        function closeProfile() {
-            document.getElementById('profile').classList.remove('active');
-            switchChat(1); // Возврат к первому чату
-        }
-    </script>
+            <button type="submit">Отправить</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Прием заявлений</p>
+    </footer>
 </body>
 </html>
