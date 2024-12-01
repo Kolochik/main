@@ -7,61 +7,75 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
             background-image: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg');
             background-size: cover;
-            background-position: center;
+            font-family: 'Courier New', Courier, monospace;
             color: white;
         }
-        .container {
+
+        .header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5); /* полупрозрачный черный фон */
             padding: 20px;
         }
+
         .logo {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 24px;
+            background: linear-gradient(90deg, #ff0000, #00ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .headline {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        .subheadline {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        .button {
-            background-color: #ff3366;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+
+        .menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
         }
-        .button:hover {
-            background-color: #ff6699;
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            padding: 10px;
         }
-        .stats {
-            margin-top: 20px;
-            font-size: 1rem;
+
+        .menu:hover .menu-content {
+            display: block;
+        }
+
+        .center-text {
+            text-align: center;
+            font-size: 32px;
+            background: linear-gradient(90deg, #00ff00, #0000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 20%;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <div class="logo">Mix Vine</div>
-        <div class="headline">Бот для алгоритмической торговли на Mix Vine</div>
-        <div class="subheadline">Автоматизированная торговая система для создания пассивного дохода</div>
-        <a href="#" class="button">Подписаться</a>
-        <div class="stats">150% доходности в год</div>
+        <div class="menu">
+            ☰
+            <div class="menu-content">
+                <a href="https://t.me/kqxsrZ" style="color: white; display: block; padding: 5px;">Мой ТГ аккаунт</a>
+                <a href="https://t.me/ZrOrV" style="color: white; display: block; padding: 5px;">Мой ТГК</a>
+            </div>
+        </div>
     </div>
+    <div class="center-text">Сайт скоро будет доступен</div>
+    <div class="footer">The site is protected Project AntiMixVine©<br>Version v0.0.3d - 2023</div>
 </body>
 </html>
