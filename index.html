@@ -28,22 +28,30 @@
         }
 
         .menu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: relative;
             cursor: pointer;
         }
 
         .menu-content {
             display: none;
             position: absolute;
+            top: 30px;
+            right: 0;
             background-color: rgba(0, 0, 0, 0.8);
             border-radius: 5px;
             padding: 10px;
+            z-index: 10;
         }
 
-        .menu:hover .menu-content {
-            display: block;
+        .menu-content a {
+            color: white; 
+            display: block; 
+            padding: 5px;
+            text-decoration: none;
+        }
+
+        .menu-content a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .center-text {
@@ -65,15 +73,36 @@
 <body>
     <div class="header">
         <div class="logo">Mix Vine</div>
-        <div class="menu">
+        <div class="menu" id="menu">
             ☰
-            <div class="menu-content">
-                <a href="https://t.me/kqxsrZ" style="color: white; display: block; padding: 5px;">Мой ТГ аккаунт</a>
-                <a href="https://t.me/ZrOrV" style="color: white; display: block; padding: 5px;">Мой ТГК</a>
+            <div class="menu-content" id="menuContent">
+                <a href="https://t.me/kqxsrZ">Мой ТГ аккаунт</a>
+                <a href="https://t.me/ZrOrV">Мой ТГК</a>
             </div>
         </div>
     </div>
     <div class="center-text">Сайт скоро будет доступен</div>
     <div class="footer">The site is protected Project AntiMixVine©<br>Version v0.0.3d - 2023</div>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuContent = document.getElementById('menuContent');
+
+        menu.addEventListener('click', () => {
+            // Переключаем отображение меню
+            if (menuContent.style.display === "block") {
+                menuContent.style.display = "none";
+            } else {
+                menuContent.style.display = "block";
+            }
+        });
+
+        // Закрытие меню при клике вне его
+        window.addEventListener('click', (event) => {
+            if (!menu.contains(event.target)) {
+                menuContent.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
