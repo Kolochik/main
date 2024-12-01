@@ -53,12 +53,6 @@
             margin-top: 20%;
         }
 
-        .countdown {
-            font-size: 24px;
-            color: white;
-            margin-top: 10px;
-        }
-
         .footer {
             position: absolute;
             bottom: 20px;
@@ -80,28 +74,6 @@
         </div>
     </div>
     <div class="center-text">Сайт скоро будет доступен</div>
-    <div class="countdown" id="countdown"></div>
     <div class="footer">The site is protected Project AntiMixVine©<br>Version v0.0.3d - 2023</div>
-
-    <script>
-        let totalSeconds = 20 * 60 * 60; // 20 часов в секундах
-
-        const countdownElement = document.getElementById('countdown');
-
-        const countdownTimer = setInterval(() => {
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            countdownElement.textContent = `Обратный отсчет: ${hours}ч ${minutes}м ${seconds}с`;
-
-            if (totalSeconds <= 0) {
-                clearInterval(countdownTimer);
-                countdownElement.textContent = "Сайт доступен!";
-            }
-
-            totalSeconds -= 1;
-        }, 1000);
-    </script>
 </body>
 </html>
