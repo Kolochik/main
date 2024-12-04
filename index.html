@@ -1,108 +1,61 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mix Vine</title>
     <style>
+        /* Set up the basic layout */
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
-            background-image: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg');
-            background-size: cover;
-            font-family: 'Courier New', Courier, monospace;
-            color: white;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 20px;
         }
 
-        .logo {
-            font-size: 24px;
-            background: linear-gradient(90deg, #ff0000, #00ff00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        .menu {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .menu-content {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 5px;
-            padding: 10px;
-            z-index: 10;
-        }
-
-        .menu-content a {
-            color: white; 
-            display: block; 
-            padding: 5px;
-            text-decoration: none;
-        }
-
-        .menu-content a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .center-text {
+        .product-info {
             text-align: center;
-            font-size: 32px;
-            color: white;  /* Белый цвет */
-            margin-top: 20%;
         }
 
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            text-align: left;
-            font-size: 14px;
+        .product-image {
+            margin-right: 50px;
+            animation: fade-in 2s ease-in-out;
+        }
+
+        .product-description {
+            animation: slide-in 2s ease-in-out;
+        }
+
+        /* Define the animations */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Mix Vine</div>
-        <div class="menu" id="menu">
-            ☰
-            <div class="menu-content" id="menuContent">
-                <a href="https://t.me/kqxsrZ">Мой ТГ аккаунт</a>
-                <a href="https://t.me/ZrOrV">Мой ТГК</a>
-            </div>
+    <div class="product">
+        <img class="product-image" src="product-image.jpg" alt="Product Image">
+        <div class="product-info">
+            <h1>Product Name</h1>
+            <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
     </div>
-    <div class="center-text">Сайт скоро будет доступен</div>
-    <div class="footer">The site is protected Project AntiMixVine©<br>Version v0.0.3d - 2023</div>
-
-    <script>
-        const menu = document.getElementById('menu');
-        const menuContent = document.getElementById('menuContent');
-
-        menu.addEventListener('click', () => {
-            // Переключаем отображение меню
-            if (menuContent.style.display === "block") {
-                menuContent.style.display = "none";
-            } else {
-                menuContent.style.display = "block";
-            }
-        });
-
-        // Закрытие меню при клике вне его
-        window.addEventListener('click', (event) => {
-            if (!menu.contains(event.target)) {
-                menuContent.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
