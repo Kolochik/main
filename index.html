@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine</title>
-    <style>
-        body {
+ body {
             margin: 0;
-            height: 100vh;
-            background-image: url('https://resizer.mail.ru/p/a4d21065-6155-5b4d-8459-b534ef3b35ba/AQAKPqBmfPIoeXMSWITLQx5OObvKZ0Q0lWPow83FBVOlBr8Lwea7FQ6CRE7Xk3SAT21xJCpY5EkaSSt8GgVbP0McnFU.jpg');
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg'); /* Замените на ссылку на изображение с горами */
+            background-image: url('https://images.wallpaperscraft.ru/image/single/kosmos_zvezdy_tumannost_169826_1024x600.jpg');
             background-size: cover;
+            color: white;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            color: white;
+            height: 100vh;
+            position: relative;
         }
 
         h1 {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 48px;
-            color: linear-gradient(90deg, #00ff00, #0077ff);
+@@ -30,6 +31,23 @@
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
-        .main-text {
-            font-family: monospace;
-            font-size: 32px;
-            text-align: center;
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: background-color 0.3s;
         }
-
-        .footer {
+        .button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            font-size: 12px;
             position: absolute;
-            bottom: 20px;
-            font-size: 14px;
-            text-align: center;
-        }
-    </style>
-</head>
+@@ -43,6 +61,7 @@
 <body>
-    <h1>MixVine</h1>
-    <div class="main-text">Привет, теперь я разукрасил этот сайт</div>
-    <div class="footer">Создана любовью Гизетдиновым Тимуром</div>
+    <h1>Mix Vine</h1>
+    <p>Эта страница была сделана за пару секунд, очень простым способом</p>
+    <a href="https://t.me/ZrOrV" class="button">Переход в ТГ</a>
+    <footer>Project MixVine® 2024</footer>
 </body>
 </html>
