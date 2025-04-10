@@ -11,46 +11,45 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-image: url("https://image.winudf.com/v2/image1/Y29tLk1vbmV5TGl2ZVdhbGxwYXBlcm5uX3NjcmVlbl81XzE1NjcwMDUyODRfMDU5/screen-5.jpg?fakeurl=1&type=.jpg"); /* Replace with your background */
+            background-image: url("https://image.winudf.com/v2/image1/Y29tLk1vbmV5TGl2ZVdhbGxwYXBlcm5uX3NjcmVlbl81XzE1NjcwMDUyODRfMDU5/screen-5.jpg?fakeurl=1&type=.jpg");
             background-size: cover;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-x: hidden;
         }
 
-        h1 { /* Title styling */
+        h1 {
             text-align: center;
-            color: white; /* Or any color you prefer */
+            color: white;
             margin-bottom: 20px;
         }
 
         .case-container {
-            width: 100vw; /* Full viewport width */
-            height: 200px; /* Adjust height as needed */
+            width: 100vw;
+            height: 200px;
             overflow: hidden;
-            white-space: nowrap; /* Prevent items from wrapping */
+            white-space: nowrap;
             background-color: rgba(0, 0, 0, 0.7);
             margin-bottom: 20px;
-
         }
 
         .case-items {
-            display: inline-block; /* Allow horizontal scrolling */
-            transition: transform 1.5s ease-in-out; /* Added animation duration and easing */
+            display: inline-block;
+            transition: transform 2.5s cubic-bezier(0.2, 0.6, 0, 1); /* Adjusted easing and default duration */
         }
 
         .case-item {
             display: inline-block;
-            width: 100px; /* Width of each item */
+            width: 100px;
             height: 100%;
             background-color: #222;
             border-right: 1px solid #444;
             text-align: center;
-            line-height: 200px; /* Vertically center text */
+            line-height: 200px;
             font-size: 24px;
             color: white;
         }
 
         button {
-            background-color: green; /* Green button */
+            background-color: green;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -62,8 +61,6 @@
             cursor: default;
             pointer-events: none;
         }
-
-
 
         #result {
             font-size: 24px;
@@ -77,9 +74,8 @@
             text-align: center;
         }
         #bot-link a {
-            color: lightblue; /* Or any color you want for the link */
+            color: lightblue;
         }
-
     </style>
 </head>
 <body>
@@ -88,52 +84,64 @@
 
     <div class="case-container">
         <div class="case-items" id="caseItems">
-            </div>
+            <!-- Items will be added dynamically here -->
+        </div>
     </div>
-
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
     <div id="result"></div>
-    <div id="instructions">Отпишите в телеграм бота номер вашего выигрыша и бот ответит через время какой приз вам выпал!</div>
+    <div id="instructions">Отпишите в телеграм бота номер вашего выигрыша, и бот ответит через время, какой приз вам выпал!</div>
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Ссылка на телеграм бота</a></div>
 
-
     <script>
-      const caseItemsContainer = document.getElementById('caseItems');
-      const openCaseButton = document.getElementById('openCaseButton');
-      const resultDisplay = document.getElementById('result');
-      const numItems = 20;  // Example number of items
+        const caseItemsContainer = document.getElementById('caseItems');
+        const openCaseButton = document.getElementById('openCaseButton');
+        const resultDisplay = document.getElementById('result');
+        const numItems = 20;
+
+        // Create items dynamically
+        for (let i = 1; i <= numItems; i++) {
+            let itemDiv = document.createElement('div');
+            itemDiv.classList.add('case-item');
+            itemDiv.textContent = '#' + i;
+            caseItemsContainer.appendChild(itemDiv);
+        }
+
+        // Duplicate items for "infinite" scrolling
+        const initialContent = caseItemsContainer.innerHTML;
+        caseItemsContainer.innerHTML += initialContent;  // Duplicate once for smooth looping
+        caseItemsContainer.innerHTML += initialContent; // Duplicate again if needed
+         caseItemsContainer.innerHTML += initialContent;
 
 
-      for (let i = 1; i <= numItems; i++) { // Start from 1
-          let itemDiv = document.createElement('div');
-          itemDiv.classList.add('case-item');
-          itemDiv.textContent = '#' + i;
-          caseItemsContainer.appendChild(itemDiv);
-      }
+        let hasOpened = false;
+
+        function openCase() {
+            if (hasOpened) return;
+
+            hasOpened = true;
+            openCaseButton.disabled = true;
+            openCaseButton.textContent = "Кейс был открыт!";
+            openCaseButton.classList.add("disabled-button");
+
+             const winningIndex = Math.floor(Math.random() * numItems);
+            const itemWidth = caseItemsContainer.children[0].offsetWidth;
+            const numSpins = 4 + Math.floor(Math.random() * 3);
+            const offset = winningIndex * itemWidth + numSpins * numItems * itemWidth;
 
 
-      let hasOpened = false;
 
-      function openCase() {
-          if (hasOpened) return;
+            caseItemsContainer.style.transition = `transform ${2 + numSpins*0.5}s cubic-bezier(0.2, 0.6, 0, 1)`; 
+            caseItemsContainer.style.transform = `translateX(-${offset}px)`;
 
-          hasOpened = true;
-          openCaseButton.disabled = true;
-          openCaseButton.textContent = "Кейс был открыт!";
-          openCaseButton.classList.add("disabled-button");
 
-          const winningIndex = Math.floor(Math.random() * numItems);
-          const itemWidth = caseItemsContainer.children[0].offsetWidth;
-          const offset = winningIndex * itemWidth;
+            setTimeout(() => {
+                resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1) + "!";
+            }, (2000 + numSpins * 500));
+        }
 
-          caseItemsContainer.style.transform = `translateX(-${offset}px)`;
-
-          setTimeout(() => {
-              resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1) + "!";
-          }, 1600); // Slightly longer than animation duration
-      }
 
     </script>
+
 </body>
 </html>
