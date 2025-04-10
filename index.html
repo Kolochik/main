@@ -3,107 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открытие кейса</title>
+    <title>MixVine Free Case</title>
     <style>
         body {
             font-family: sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url("https://image.winudf.com/v2/image1/Y29tLk1vbmV5TGl2ZVdhbGxwYXBlcm5uX3NjcmVlbl81XzE1NjcwMDUyODRfMDU5/screen-5.jpg?fakeurl=1&type=.jpg");
+            background-image: url("https://image.winudf.com/v2/image1/Y29tLk1vbmV5TGl2ZVdhbGxwYXBlcm5uX3NjcmVlbl81XzE1NjcwMDUyODRfMDU5/screen-5.jpg?fakeurl=1&type=.jpg"); /* Replace with your background */
             background-size: cover;
-            overflow: hidden;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        h1 { /* Title styling */
+            text-align: center;
+            color: white; /* Or any color you prefer */
+            margin-bottom: 20px;
         }
 
         .case-container {
-            width: 400px;
-            height: 300px;
+            width: 100vw; /* Full viewport width */
+            height: 200px; /* Adjust height as needed */
             overflow: hidden;
-            border: 2px solid #333;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+            white-space: nowrap; /* Prevent items from wrapping */
+            background-color: rgba(0, 0, 0, 0.7);
             margin-bottom: 20px;
-            position: relative;
+
         }
 
         .case-items {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            transition: transform 1s ease-in-out;
+            display: inline-block; /* Allow horizontal scrolling */
+            transition: transform 1.5s ease-in-out; /* Added animation duration and easing */
         }
 
         .case-item {
-            width: 100%;
-            height: 60px;
-            background-color: #222; /* Darker item background */
-            border-bottom: 1px solid #444; /* Darker border */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white; /* White text */
-        }
-
-        button { /* ... (button styles remain the same) */ }
-        .disabled-button { /* ... (disabled button styles remain the same) */ }
-
-        #result { /* Style for the result display */
-            font-size: 20px;
+            display: inline-block;
+            width: 100px; /* Width of each item */
+            height: 100%;
+            background-color: #222;
+            border-right: 1px solid #444;
+            text-align: center;
+            line-height: 200px; /* Vertically center text */
+            font-size: 24px;
             color: white;
-            margin-top: 10px; /* Space above the result */
         }
+
+        button {
+            background-color: green; /* Green button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .disabled-button {
+            background-color: gray;
+            cursor: default;
+            pointer-events: none;
+        }
+
+
+
+        #result {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        #instructions, #bot-link {
+            font-size: 18px;
+            color: white;
+            text-align: center;
+        }
+        #bot-link a {
+            color: lightblue; /* Or any color you want for the link */
+        }
+
     </style>
 </head>
 <body>
 
+    <h1>MixVine Project даёт вам возможность прокрутить бесплатно кейс!</h1>
+
     <div class="case-container">
         <div class="case-items" id="caseItems">
-            <!-- Items will be added dynamically -->
-        </div>
+            </div>
     </div>
 
+
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
-    <div id="result"></div> <div id="result"></div>  </div>
+    <div id="result"></div>
+    <div id="instructions">Отпишите в телеграм бота номер вашего выигрыша и бот ответит через время какой приз вам выпал!</div>
+    <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Ссылка на телеграм бота</a></div>
+
 
     <script>
-        const caseItemsContainer = document.getElementById('caseItems');
-        const openCaseButton = document.getElementById('openCaseButton');
-        const resultDisplay = document.getElementById('result');  // Get the result display element
-        const numItems = 7; // Changed to 7 items
-        const itemNames = [
-            "#5470", "#1230", "#6700", "#4102", "#3190", "#1290", "#8020"
-        ];
+      const caseItemsContainer = document.getElementById('caseItems');
+      const openCaseButton = document.getElementById('openCaseButton');
+      const resultDisplay = document.getElementById('result');
+      const numItems = 20;  // Example number of items
 
 
-        for (let i = 0; i < numItems; i++) {
-            let itemDiv = document.createElement('div');
-            itemDiv.classList.add('case-item');
-            itemDiv.textContent = itemNames[i]; // Use item names from the array
-            caseItemsContainer.appendChild(itemDiv);
-        }
-
-        let hasOpened = false;
+      for (let i = 1; i <= numItems; i++) { // Start from 1
+          let itemDiv = document.createElement('div');
+          itemDiv.classList.add('case-item');
+          itemDiv.textContent = '#' + i;
+          caseItemsContainer.appendChild(itemDiv);
+      }
 
 
-        function openCase() {
-           if (hasOpened) return;
-            hasOpened = true;
+      let hasOpened = false;
 
-            const winningIndex = Math.floor(Math.random() * numItems);
-            // ... (rest of the openCase function is the same)
+      function openCase() {
+          if (hasOpened) return;
 
+          hasOpened = true;
+          openCaseButton.disabled = true;
+          openCaseButton.textContent = "Кейс был открыт!";
+          openCaseButton.classList.add("disabled-button");
 
-            setTimeout(() => {
-                // ... (button disabling code is the same)
+          const winningIndex = Math.floor(Math.random() * numItems);
+          const itemWidth = caseItemsContainer.children[0].offsetWidth;
+          const offset = winningIndex * itemWidth;
 
+          caseItemsContainer.style.transform = `translateX(-${offset}px)`;
 
-                resultDisplay.textContent = "Вы выиграли: " + itemNames[winningIndex]; // Display the won item name
-            }, 1100);
-        }
+          setTimeout(() => {
+              resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1) + "!";
+          }, 1600); // Slightly longer than animation duration
+      }
+
     </script>
-
 </body>
 </html>
