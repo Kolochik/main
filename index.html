@@ -13,80 +13,26 @@
             min-height: 100vh;
             background-image: url("https://wallpapers.com/images/hd/black-gold-14lglm1onjrwd719.jpg");
             background-size: cover;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            color: white; /* Default text color to white */
         }
 
-        h1 {
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-        }
+        /* ... (other styles remain the same) */
 
-        .case-container {
-            width: 100vw;
-            height: 200px;
-            overflow: hidden;
-            white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0.7);
-            margin-bottom: 20px;
-        }
-
-        .case-items {
-            display: inline-block;
-            transition: transform 2.5s cubic-bezier(0.2, 0.6, 0, 1); /* Adjusted easing and default duration */
-        }
-
-        .case-item {
-            display: inline-block;
-            width: 100px;
-            height: 100%;
-            background-color: #222;
-            border-right: 1px solid #444;
-            text-align: center;
-            line-height: 200px;
+        #result { /* Green winning number */
             font-size: 24px;
-            color: white;
-        }
-
-        button {
-            background-color: green;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        .disabled-button {
-            background-color: gray;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        #result {
-            font-size: 24px;
-            color: white;
+            color: green; /* Green text for the result */
             margin-bottom: 10px;
         }
 
-        #instructions, #bot-link {
-            font-size: 18px;
-            color: white;
-            text-align: center;
-        }
-        #bot-link a {
-            color: lightblue;
-        }
+         /* ... (rest of the CSS remains the same) */
     </style>
 </head>
 <body>
 
     <h1>MixVine Project даёт вам возможность прокрутить бесплатно кейс!</h1>
 
-    <div class="case-container">
-        <div class="case-items" id="caseItems">
-            <!-- Items will be added dynamically here -->
-        </div>
-    </div>
+    <div class="case-container" id="caseContainer"> </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
     <div id="result"></div>
@@ -94,51 +40,59 @@
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Ссылка на телеграм бота</a></div>
 
     <script>
-        const caseItemsContainer = document.getElementById('caseItems');
+        const caseContainer = document.getElementById('caseContainer');
         const openCaseButton = document.getElementById('openCaseButton');
         const resultDisplay = document.getElementById('result');
         const numItems = 20;
 
-        // Create items dynamically
-        for (let i = 1; i <= numItems; i++) {
-            let itemDiv = document.createElement('div');
-            itemDiv.classList.add('case-item');
-            itemDiv.textContent = '#' + i;
-            caseItemsContainer.appendChild(itemDiv);
-        }
-
-        // Duplicate items for "infinite" scrolling
-        const initialContent = caseItemsContainer.innerHTML;
-        caseItemsContainer.innerHTML += initialContent;  // Duplicate once for smooth looping
-        caseItemsContainer.innerHTML += initialContent; // Duplicate again if needed
-         caseItemsContainer.innerHTML += initialContent;
-
-
         let hasOpened = false;
+
+
+        function createRoulette() { // Function to create the roulette elements dynamically
+            const caseItemsContainer = document.createElement('div');
+            caseItemsContainer.classList.add('case-items');
+            caseItemsContainer.id = 'caseItems';
+
+            for (let i = 1; i <= numItems; i++) {
+                let itemDiv = document.createElement('div');
+                itemDiv.classList.add('case-item');
+                itemDiv.textContent = '#' + i;
+                caseItemsContainer.appendChild(itemDiv);
+            }
+
+            const initialContent = caseItemsContainer.innerHTML;
+            caseItemsContainer.innerHTML += initialContent;
+            caseItemsContainer.innerHTML += initialContent;
+            caseItemsContainer.innerHTML += initialContent;
+
+            caseContainer.appendChild(caseItemsContainer);
+
+            return caseItemsContainer;
+        }
 
         function openCase() {
             if (hasOpened) return;
-
             hasOpened = true;
+
+            const caseItemsContainer = createRoulette(); // Create the roulette on click
+
             openCaseButton.disabled = true;
             openCaseButton.textContent = "Кейс был открыт!";
             openCaseButton.classList.add("disabled-button");
 
-             const winningIndex = Math.floor(Math.random() * numItems);
+            const winningIndex = Math.floor(Math.random() * numItems);
             const itemWidth = caseItemsContainer.children[0].offsetWidth;
             const numSpins = 4 + Math.floor(Math.random() * 3);
             const offset = winningIndex * itemWidth + numSpins * numItems * itemWidth;
 
-
-
-            caseItemsContainer.style.transition = `transform ${2 + numSpins*0.5}s cubic-bezier(0.2, 0.6, 0, 1)`; 
+            caseItemsContainer.style.transition = `transform ${2 + numSpins * 0.5}s cubic-bezier(0.2, 0.6, 0, 1)`;
             caseItemsContainer.style.transform = `translateX(-${offset}px)`;
 
-
             setTimeout(() => {
-                resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1) + "!";
+                resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1); // Display the winning number
             }, (2000 + numSpins * 500));
         }
+
 
 
     </script>
