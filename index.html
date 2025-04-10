@@ -8,11 +8,13 @@
         body {
             font-family: sans-serif;
             display: flex;
+            flex-direction: column; /* Items and button in column */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
-            overflow: hidden; /* Скрываем полосы прокрутки во время анимации */
+            background-image: url("https://image.winudf.com/v2/image1/Y29tLk1vbmV5TGl2ZVdhbGxwYXBlcm5uX3NjcmVlbl81XzE1NjcwMDUyODRfMDU5/screen-5.jpg?fakeurl=1&type=.jpg");
+            background-size: cover; /* Cover the entire background */
+            overflow: hidden; 
         }
 
         .case-container {
@@ -21,6 +23,8 @@
             overflow: hidden;
             border: 2px solid #333;
             border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            margin-bottom: 20px; /* Space below the container */
             position: relative;
         }
 
@@ -28,12 +32,12 @@
             display: flex;
             flex-direction: column;
             position: absolute;
-            transition: transform 1s ease-in-out; /* Длительность и тип анимации */
+            transition: transform 1s ease-in-out; 
         }
 
         .case-item {
             width: 100%;
-            height: 60px; /* Высота элемента */
+            height: 60px; 
             background-color: #eee;
             border-bottom: 1px solid #ccc;
             display: flex;
@@ -43,7 +47,6 @@
         }
 
         button {
-            margin-top: 20px;
             padding: 10px 20px;
             border: none;
             background-color: #4CAF50;
@@ -51,23 +54,29 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        .disabled-button { /* Style for the disabled button */
+            background-color: #ccc;
+            cursor: default;
+            pointer-events: none; /* Prevent clicks on disabled button */
+        }
+
     </style>
 </head>
 <body>
 
     <div class="case-container">
         <div class="case-items" id="caseItems">
-            <!-- Элементы будут добавлены сюда динамически -->
-        </div>
+             </div>
     </div>
 
-    <button onclick="openCase()">Открыть кейс</button>
+    <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
 
     <script>
         const caseItemsContainer = document.getElementById('caseItems');
-        const numItems = 15; // Общее количество предметов в кейсе
+        const openCaseButton = document.getElementById('openCaseButton'); // Get the button element
+        const numItems = 15; 
 
-        // Создаем начальные элементы
         for (let i = 0; i < numItems; i++) {
             let itemDiv = document.createElement('div');
             itemDiv.classList.add('case-item');
@@ -75,25 +84,25 @@
             caseItemsContainer.appendChild(itemDiv);
         }
 
+        let hasOpened = false; // Flag to track if the case has been opened
 
         function openCase() {
-            // Определяем выигрышный предмет (случайно)
-            const winningIndex = Math.floor(Math.random() * numItems);
+            if (hasOpened) return; // Prevent multiple openings
 
-            // Вычисляем смещение прокрутки, чтобы выигрышный элемент был в центре
+            hasOpened = true;
+
+            const winningIndex = Math.floor(Math.random() * numItems);
             const itemHeight = caseItemsContainer.children[0].offsetHeight;
             const scrollOffset = winningIndex * itemHeight - caseItemsContainer.offsetHeight / 2 + itemHeight / 2 ;
-
-            // Анимируем прокрутку
             caseItemsContainer.style.transform = `translateY(-${scrollOffset}px)`;
 
-             // Обновляем текст выигрышного предмета (с задержкой для анимации)
             setTimeout(() => {
                 caseItemsContainer.children[winningIndex].textContent = 'Вы выиграли! (Предмет ' + (winningIndex + 1) + ')';
-            }, 1100); // Задержка немного больше, чем длительность анимации
-
-
+                openCaseButton.classList.add("disabled-button"); // Disable the button after opening
+                openCaseButton.textContent = "Кейс открыт";  // Change the button text
+            }, 1100);
         }
+
     </script>
 
 </body>
