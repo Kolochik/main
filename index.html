@@ -1,46 +1,121 @@
- body {
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MixVine Casino</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://cdn1.ozone.ru/s3/multimedia-c/6286761432.jpg'); /* Замените на ссылку на изображение с горами */
-            background-image: url('https://images.wallpaperscraft.ru/image/single/kosmos_zvezdy_tumannost_169826_1024x600.jpg');
-            background-size: cover;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            position: relative;
+            padding: 0;
         }
-
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
         h1 {
-@@ -30,6 +31,23 @@
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: #333;
         }
-
-        .button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
+        .case {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ccc;
             border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            margin: 20px 0;
-            transition: background-color 0.3s;
+            background-color: #e0e0e0;
+            transition: transform 0.3s ease;
         }
-        .button:hover {
-            background-color: #0056b3;
+        .case:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
-        footer {
-            font-size: 12px;
-            position: absolute;
-@@ -43,6 +61,7 @@
+        .case h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .privileges {
+            list-style: none;
+            padding: 0;
+        }
+        .privileges li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+    </style>
+</head>
 <body>
-    <h1>Mix Vine</h1>
-    <p>Эта страница была сделана за пару секунд, очень простым способом</p>
-    <a href="https://t.me/kqxsrZ" class="button">Переход в ТГ</a>
-    <footer>Project MixVine® 2024</footer>
+    <div class="container">
+        <h1>MixVine Casino</h1>
+
+        <div class="case">
+            <h2>Start</h2>
+            <ul class="privileges">
+                <li>Бонус 100 монет</li>
+            </ul>
+        </div>
+
+        <div class="case">
+            <h2>Pro</h2>
+            <ul class="privileges">
+                <li>Бонус 500 монет</li>
+                <li>Эксклюзивный предмет</li>
+            </ul>
+        </div>
+
+        <div class="case">
+            <h2>Premium</h2>
+            <ul class="privileges">
+                <li>Бонус 1000 монет</li>
+                <li>2 эксклюзивных предмета</li>
+                <li>Удвоенный опыт</li>
+            </ul>
+        </div>
+
+        <div class="case">
+            <h2>Ultimate</h2>
+            <ul class="privileges">
+                <li>Бонус 5000 монет</li>
+                <li>5 эксклюзивных предметов</li>
+                <li>Тройной опыт</li>
+                <li>VIP статус</li>
+            </ul>
+        </div>
+
+        <div class="case">
+            <h2>Ultra</h2>
+             <ul class="privileges">
+                <li>Бонус 10000 монет</li>
+                <li>10 эксклюзивных предметов</li>
+                <li>Пятикратный опыт</li>
+                <li>VIP+ статус</li>
+            </ul>
+        </div>
+        <div class="case">
+            <h2>Legendary</h2>
+            <ul class="privileges">
+                <li>Бонус 50000 монет</li>
+                <li>Легендарный предмет</li>
+                <li>Десятикратный опыт</li>
+                <li>Супер VIP статус</li>
+            </ul>
+        </div>
+        <div class="case">
+            <h2>Very Rare</h2>
+            <ul class="privileges">
+                <li>Бонус 100000 монет</li>
+                <li>3 Легендарных предмета</li>
+                <li>Двадцатикратный опыт</li>
+                <li>Мега VIP статус</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
