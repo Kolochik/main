@@ -3,76 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Casino</title>
+    <title>Открытие кейса</title>
     <style>
-        /* ... (стили из предыдущего ответа) */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Скрываем полосы прокрутки во время анимации */
+        }
+
+        .case-container {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .case-items {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            transition: transform 1s ease-in-out; /* Длительность и тип анимации */
+        }
+
+        .case-item {
+            width: 100%;
+            height: 60px; /* Высота элемента */
+            background-color: #eee;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MixVine Casino</h1>
 
-        <div class="case">
-            <h2>Start</h2>
-            <ul class="privileges">
-                <li>Доступ к чату</li>
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Pro</h2>
-            <ul class="privileges">
-                <li>Доступ к эксклюзивным играм</li>
-                <li>Увеличенный лимит ставок</li>
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Premium</h2>
-            <ul class="privileges">
-                <li>Персональный менеджер</li>
-                <li>Ускоренный вывод средств</li>
-                <li>Подарки на день рождения</li>
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Ultimate</h2>
-            <ul class="privileges">
-                <li>Участие в закрытых турнирах</li>
-                <li>Эксклюзивные бонусы</li>
-                <li>Приоритетная поддержка</li>
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Ultra</h2>
-            <ul class="privileges">
-                <li>Доступ к VIP-зоне</li>
-                <li>Индивидуальные предложения</li>
-                <li>Повышенный кэшбэк</li>
-
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Legendary</h2>
-            <ul class="privileges">
-                <li>Личный консьерж</li>
-                <li>Эксклюзивные мероприятия</li>
-                <li>Приоритетный доступ к новым играм</li>
-            </ul>
-        </div>
-
-        <div class="case">
-            <h2>Very Rare</h2>
-            <ul class="privileges">
-                <li>Все привилегии предыдущих уровней</li>
-                <li>Индивидуальный дизайн профиля</li>
-                <li>Участие в разработке игр</li>
-
-            </ul>
+    <div class="case-container">
+        <div class="case-items" id="caseItems">
+            <!-- Элементы будут добавлены сюда динамически -->
         </div>
     </div>
+
+    <button onclick="openCase()">Открыть кейс</button>
+
+    <script>
+        const caseItemsContainer = document.getElementById('caseItems');
+        const numItems = 15; // Общее количество предметов в кейсе
+
+        // Создаем начальные элементы
+        for (let i = 0; i < numItems; i++) {
+            let itemDiv = document.createElement('div');
+            itemDiv.classList.add('case-item');
+            itemDiv.textContent = 'Пусто ' + (i + 1);
+            caseItemsContainer.appendChild(itemDiv);
+        }
+
+
+        function openCase() {
+            // Определяем выигрышный предмет (случайно)
+            const winningIndex = Math.floor(Math.random() * numItems);
+
+            // Вычисляем смещение прокрутки, чтобы выигрышный элемент был в центре
+            const itemHeight = caseItemsContainer.children[0].offsetHeight;
+            const scrollOffset = winningIndex * itemHeight - caseItemsContainer.offsetHeight / 2 + itemHeight / 2 ;
+
+            // Анимируем прокрутку
+            caseItemsContainer.style.transform = `translateY(-${scrollOffset}px)`;
+
+             // Обновляем текст выигрышного предмета (с задержкой для анимации)
+            setTimeout(() => {
+                caseItemsContainer.children[winningIndex].textContent = 'Вы выиграли! (Предмет ' + (winningIndex + 1) + ')';
+            }, 1100); // Задержка немного больше, чем длительность анимации
+
+
+        }
+    </script>
+
 </body>
 </html>
