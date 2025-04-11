@@ -118,6 +118,7 @@
             font-weight: bold; margin-bottom: 15px;
             transition: background-color 0.3s ease, transform 0.1s ease;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
+            position: relative; /* Для позиционирования подсказки */
         }
         button#openCaseButton:hover:not(:disabled) { background-color: #b48a00; }
         button#openCaseButton:active:not(:disabled) { transform: scale(0.98); }
@@ -265,6 +266,26 @@
         #agreementLabel a:hover {
             text-decoration: underline;
         }
+
+        /* Стили для подсказки */
+        button#openCaseButton[disabled]:hover::after {
+            content: 'Необходимо согласиться с Политикой конфиденциальности и Пользовательским соглашением';
+            position: absolute;
+            bottom: -40px; /* Расположение подсказки */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1; /* Чтобы подсказка была над другими элементами */
+        }
+
+        #agreementContainer.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -282,7 +303,7 @@
     </div>
 
     <!-- Контейнер для соглашения -->
-    <div class="agreement-container">
+    <div class="agreement-container" id="agreementContainer">
         <input type="checkbox" id="agreementCheckbox">
         <label for="agreementCheckbox" id="agreementLabel">Я согласен с <a href="https://mixvineproject.github.io/politika" target="_blank">Политикой конфиденциальности</a> и <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательским соглашением</a></label>
     </div>
@@ -350,6 +371,7 @@
         const winItemTitle = document.getElementById('winItemTitle');
         const winModalCloseButton = document.getElementById('winModalCloseButton');
         const agreementCheckbox = document.getElementById('agreementCheckbox');
+        const agreementContainer = document.getElementById('agreementContainer');
 
         const numUniqueItems = config.items.length;
 
@@ -451,6 +473,7 @@
             isSpinning = true;
             openCaseButton.disabled = true;
             openCaseButton.textContent = "Крутится...";
+            agreementContainer.classList.add("hidden");
 
             const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
             const winningItem = config.items[winningIndexInUniqueSet];
@@ -534,6 +557,25 @@
         agreementCheckbox.addEventListener('change', function() {
             openCaseButton.disabled = !this.checked;
         });
+
+        // Сразу после загрузки скрипта проверяем, было ли согласие сохранено в localStorage
+         window.addEventListener('load', () => {
+            if (localStorage.getItem('agreementAccepted') === 'true') {
+                agreementCheckbox.checked = true;
+                openCaseButton.disabled = false;
+                agreementContainer.classList.add("hidden");
+            }
+        });
+
+        agreementCheckbox.addEventListener('change', function() {
+             openCaseButton.disabled = !this.checked;
+             // Если согласие дано, сохраняем его в localStorage
+             if (this.checked) {
+                 localStorage.setItem('agreementAccepted', 'true');
+             } else {
+                 localStorage.removeItem('agreementAccepted');
+             }
+         });
 
     </script>
 
