@@ -3,143 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Free Case</title>
+    <title>MixVine Free Case - Customizable</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center; /* Center vertically too */
             min-height: 100vh;
-            background-image: url("https://wallpapers.com/images/hd/black-gold-14lglm1onjrwd719.jpg");
+            background-color: #1a1a1d; /* Darker background */
+            /* Using a gradient instead of image for faster loading/simpler customization */
+            background-image: linear-gradient(135deg, #1a1a1d 0%, #333338 100%);
             background-size: cover;
             overflow-x: hidden;
+            color: #e0e0e0; /* Lighter text color for better contrast */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
             text-align: center;
-            color: white;
-            margin-bottom: 20px;
+            color: #f0c419; /* Gold-like color */
+            margin-bottom: 30px; /* Increased spacing */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
+        .case-wrapper { /* Added wrapper for centering marker */
+            position: relative;
+            width: 100%;
+            max-width: 80vw; /* Limit max width on large screens */
+            margin-bottom: 30px;
+        }
+
+        /* Added a marker to show the winning position */
+        .case-marker {
+            position: absolute;
+            top: -5px; /* Position slightly above */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #f0c419; /* Gold marker */
+            z-index: 10;
+        }
+         .case-marker-line { /* Optional line marker */
+             position: absolute;
+             top: 0;
+             left: 50%;
+             transform: translateX(-50%);
+             width: 3px;
+             height: 100%;
+             background-color: rgba(240, 196, 25, 0.7); /* Semi-transparent gold */
+             z-index: 5;
+             box-shadow: 0 0 5px rgba(240, 196, 25, 0.5);
+        }
+
+
         .case-container {
-            width: 100vw;
-            height: 200px;
+            width: 100%; /* Take width from wrapper */
+            height: 150px; /* Adjusted height */
             overflow: hidden;
             white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0.7);
-            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #444; /* Added border */
+            border-radius: 5px; /* Rounded corners */
+            position: relative; /* Needed for marker line */
         }
 
         .case-items {
             display: inline-block;
-            transition: transform 2.5s cubic-bezier(0.2, 0.6, 0, 1); /* Adjusted easing and default duration */
+            /* Default transition, JS will override duration */
+            transition: transform 5s cubic-bezier(0.1, 0.6, 0.1, 1); /* Slower, smoother easing */
+            /* Add some initial padding to center the first item better visually at start */
+            /* padding-left: calc(50% - 50px);  Adjust 50px based on half item width if needed */
         }
 
         .case-item {
-            display: inline-block;
-            width: 100px;
+            display: inline-flex; /* Use flex for better content centering */
+            align-items: center;
+            justify-content: center;
+            width: 120px; /* Wider items */
             height: 100%;
-            background-color: #222;
+            background-color: #28282d; /* Slightly lighter item background */
             border-right: 1px solid #444;
             text-align: center;
-            line-height: 200px;
-            font-size: 24px;
-            color: white;
+            font-size: 18px; /* Adjusted font size */
+            font-weight: bold;
+            color: #e0e0e0;
+            box-sizing: border-box; /* Include padding/border in width */
+            padding: 5px;
+            vertical-align: top; /* Align items nicely */
+        }
+        /* Example: Different colors for items (can be set via JS) */
+        .case-item.common { background-color: #3a3a40; color: #ccc; }
+        .case-item.uncommon { background-color: #4a5a40; color: #aaffaa; }
+        .case-item.rare { background-color: #404a7a; color: #aaaaff; }
+        .case-item.epic { background-color: #6a407a; color: #ffaafe; }
+        .case-item.legendary { background-color: #7a6a40; color: #f0c419; }
+
+        /* Style for images inside items */
+        .case-item img {
+            max-width: 80%;
+            max-height: 60%;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .case-item span { /* If you have text below image */
+             display: block;
+             font-size: 14px;
+             margin-top: auto; /* Push text to bottom if using flex */
         }
 
-        button {
-            background-color: green;
+
+        button#openCaseButton {
+            background-color: #4CAF50; /* Green */
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px; /* Bigger padding */
             border: none;
+            border-radius: 5px; /* Rounded corners */
             cursor: pointer;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
         }
-        .disabled-button {
-            background-color: gray;
-            cursor: default;
-            pointer-events: none;
+        button#openCaseButton:hover:not(:disabled) {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        button#openCaseButton:active:not(:disabled) {
+            transform: scale(0.98); /* Click effect */
+        }
+
+        button#openCaseButton:disabled { /* More specific selector */
+            background-color: #666; /* Darker gray for disabled */
+            color: #bbb;
+            cursor: not-allowed; /* Standard disabled cursor */
+            /* pointer-events: none; is automatically handled by :disabled */
         }
 
         #result {
-            font-size: 24px;
-            color: white;
-            margin-bottom: 10px;
+            font-size: 26px; /* Larger result text */
+            font-weight: bold;
+            color: #f0c419; /* Gold result text */
+            margin-bottom: 15px;
+            min-height: 30px; /* Reserve space */
+            text-align: center;
         }
 
         #instructions, #bot-link {
-            font-size: 18px;
-            color: white;
+            font-size: 16px; /* Slightly smaller instructions */
+            color: #ccc;
             text-align: center;
+            max-width: 600px; /* Limit width for readability */
+            line-height: 1.5;
         }
         #bot-link a {
-            color: lightblue;
+            color: #6bbdff; /* Lighter blue link */
+            text-decoration: none;
         }
+         #bot-link a:hover {
+             text-decoration: underline;
+         }
+
+         /* Button for Resetting (Optional) */
+         #resetButton {
+            background-color: #f44336; /* Red */
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px; /* Space above reset */
+            display: none; /* Hidden initially */
+         }
+          #resetButton:hover {
+              background-color: #da190b;
+          }
+
     </style>
 </head>
 <body>
 
-    <h1>MixVine Project даёт вам возможность прокрутить бесплатно кейс!</h1>
+    <h1>Крути кейс от MixVine Project!</h1>
 
-    <div class="case-container">
-        <div class="case-items" id="caseItems">
-            <!-- Items will be added dynamically here -->
+    <div class="case-wrapper">
+        <div class="case-marker"></div> <!-- The triangle marker -->
+        <div class="case-container">
+             <div class="case-marker-line"></div> <!-- The line marker -->
+            <div class="case-items" id="caseItems">
+                <!-- Items will be added dynamically here -->
+            </div>
         </div>
     </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
+    <button id="resetButton" onclick="resetCase()">Крутить ещё раз (Тест)</button> <!-- Optional Reset Button -->
     <div id="result"></div>
-    <div id="instructions">Отпишите в телеграм бота номер вашего выигрыша, и бот ответит через время, какой приз вам выпал!</div>
-    <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Ссылка на телеграм бота</a></div>
+    <div id="instructions">Скопируйте или запомните ваш выигрыш и сообщите его в телеграм боте. Бот обработает запрос и сообщит, какой приз вы получите!</div>
+    <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Перейти к боту MixVine</a></div>
 
     <script>
+        // --- КОНФИГУРАЦИЯ ---
+        const config = {
+            // Замените этот массив на ваши предметы
+            // Каждый предмет - это объект со свойством 'display' (что показывать)
+            // Можно добавить другие свойства, например 'rarity' для цвета или 'img' для картинки
+            items: [
+                { display: "Предмет 1", rarity: "common" },
+                { display: "Супер Приз!", rarity: "legendary" },
+                { display: "Предмет 3", rarity: "common" },
+                { display: "Что-то Синее", rarity: "rare", img: "https://via.placeholder.com/50/0000FF/FFFFFF?text=IMG" }, // Пример с картинкой
+                { display: "Предмет 5", rarity: "common" },
+                { display: "Немного Удачи", rarity: "uncommon" },
+                { display: "Предмет 7", rarity: "common" },
+                { display: "Фиолетовый Топ", rarity: "epic" },
+                { display: "Предмет 9", rarity: "common" },
+                { display: "Предмет 10", rarity: "common" },
+                { display: "Редкая Вещь", rarity: "rare" },
+                { display: "Предмет 12", rarity: "common" },
+                { display: "Еще Удача", rarity: "uncommon" },
+                { display: "Предмет 14", rarity: "common" },
+                { display: "Легендарка!", rarity: "legendary" },
+                 { display: "Предмет 16", rarity: "common" },
+                 { display: "Предмет 17", rarity: "uncommon" },
+                 { display: "Предмет 18", rarity: "common" },
+                 { display: "Предмет 19", rarity: "rare" },
+                 { display: "Эпик!", rarity: "epic" },
+            ],
+            numberOfDuplicates: 5, // Сколько раз дублировать набор предметов для плавной прокрутки
+            spinDurationBase: 5, // Базовая длительность анимации в секундах
+            spinsMultiplier: 0.5, // Дополнительные секунды за каждый "полный оборот"
+            minSpins: 5, // Минимальное количество "полных оборотов"
+            maxSpins: 8, // Максимальное количество "полных оборотов"
+            showResetButton: true // Показывать ли кнопку сброса (для теста или если разрешено >1 спина)
+        };
+        // --- КОНЕЦ КОНФИГУРАЦИИ ---
+
         const caseItemsContainer = document.getElementById('caseItems');
         const openCaseButton = document.getElementById('openCaseButton');
+        const resetButton = document.getElementById('resetButton'); // Get reset button
         const resultDisplay = document.getElementById('result');
-        const numItems = 20;
+        const numUniqueItems = config.items.length; // Get number of items from config
 
-        // Create items dynamically
-        for (let i = 1; i <= numItems; i++) {
-            let itemDiv = document.createElement('div');
-            itemDiv.classList.add('case-item');
-            itemDiv.textContent = '#' + i;
-            caseItemsContainer.appendChild(itemDiv);
+        let isSpinning = false; // Флаг, идет ли анимация
+        let itemWidth = 0; // Ширина одного элемента (рассчитается позже)
+        let itemsGenerated = false; // Флаг, сгенерированы ли итемы
+
+        // Function to create item elements
+        function createItems() {
+            caseItemsContainer.innerHTML = ''; // Clear previous items if any
+            const fragment = document.createDocumentFragment(); // Use fragment for performance
+
+            // Create original set + duplicates
+            const totalItemsToCreate = numUniqueItems * (1 + config.numberOfDuplicates);
+            for (let i = 0; i < totalItemsToCreate; i++) {
+                const itemIndex = i % numUniqueItems; // Get index within the original set
+                const itemData = config.items[itemIndex];
+
+                let itemDiv = document.createElement('div');
+                itemDiv.classList.add('case-item');
+                if (itemData.rarity) {
+                    itemDiv.classList.add(itemData.rarity); // Add rarity class for styling
+                }
+
+                // Add content (image or text)
+                if (itemData.img) {
+                    const img = document.createElement('img');
+                    img.src = itemData.img;
+                    img.alt = itemData.display; // Alt text for accessibility
+                    itemDiv.appendChild(img);
+                    const span = document.createElement('span');
+                    span.textContent = itemData.display;
+                    itemDiv.appendChild(span);
+                } else {
+                    itemDiv.textContent = itemData.display; // Just display text
+                }
+
+                fragment.appendChild(itemDiv);
+            }
+            caseItemsContainer.appendChild(fragment);
+
+             // Calculate item width AFTER items are added to the DOM
+            if (caseItemsContainer.children.length > 0) {
+                // Force reflow/layout calculation
+                 caseItemsContainer.offsetHeight;
+                itemWidth = caseItemsContainer.children[0].offsetWidth;
+                 console.log("Item width calculated:", itemWidth);
+
+                 // Calculate initial offset to center the target item
+                 const containerWidth = caseItemsContainer.parentElement.offsetWidth;
+                 const initialOffset = (containerWidth / 2) - (itemWidth / 2);
+                 console.log("Initial Offset:", initialOffset);
+                 // Apply initial padding/margin or transform if needed for centering
+                 // This example uses CSS transform on the container for the spin,
+                 // so centering the "target" under the marker is done by calculating spin offset correctly.
+                 // Initial visual centering can be tricky; using the marker is often easier.
+            }
+
+            itemsGenerated = true;
         }
 
-        // Duplicate items for "infinite" scrolling
-        const initialContent = caseItemsContainer.innerHTML;
-        caseItemsContainer.innerHTML += initialContent;  // Duplicate once for smooth looping
-        caseItemsContainer.innerHTML += initialContent; // Duplicate again if needed
-         caseItemsContainer.innerHTML += initialContent;
+        // Function to reset the case state (optional)
+        function resetCase() {
+            isSpinning = false;
+            openCaseButton.disabled = false;
+            openCaseButton.textContent = "Открыть кейс";
+            resultDisplay.textContent = "";
+            resetButton.style.display = 'none'; // Hide reset button again
+
+            // Reset scroll position instantly
+            caseItemsContainer.style.transition = 'none'; // Disable transition for instant reset
+            caseItemsContainer.style.transform = `translateX(0px)`; // Or calculate initial centered position
+
+            // Force reflow before re-enabling transitions
+            caseItemsContainer.offsetHeight;
+
+            // Restore default transition (optional, if needed, or let openCase set it)
+            // caseItemsContainer.style.transition = `transform ${config.spinDurationBase}s cubic-bezier(0.1, 0.6, 0.1, 1)`;
+
+            console.log("Case reset.");
+        }
 
 
-        let hasOpened = false;
-
+        // --- MAIN SPIN FUNCTION ---
         function openCase() {
-            if (hasOpened) return;
+            if (isSpinning || !itemsGenerated || itemWidth === 0) {
+                 console.warn("Spin prevented: Already spinning, items not ready, or item width unknown.");
+                 if (itemWidth === 0 && itemsGenerated) {
+                    console.log("Retrying item width calculation...");
+                    itemWidth = caseItemsContainer.children[0].offsetWidth;
+                    if (itemWidth === 0) {
+                         console.error("Could not determine item width!");
+                         resultDisplay.textContent = "Ошибка: Не удалось рассчитать ширину элемента.";
+                         return;
+                    } else {
+                        console.log("Item width calculated on retry:", itemWidth);
+                    }
+                 } else {
+                     return;
+                 }
 
-            hasOpened = true;
+            }
+
+
+            isSpinning = true;
             openCaseButton.disabled = true;
-            openCaseButton.textContent = "Кейс был открыт!";
-            openCaseButton.classList.add("disabled-button");
+            openCaseButton.textContent = "Крутится...";
+            resultDisplay.textContent = ""; // Clear previous result
+             if (resetButton.style.display !== 'none') {
+                resetButton.style.display = 'none'; // Hide reset button during spin
+             }
 
-             const winningIndex = Math.floor(Math.random() * numItems);
-            const itemWidth = caseItemsContainer.children[0].offsetWidth;
-            const numSpins = 4 + Math.floor(Math.random() * 3);
-            const offset = winningIndex * itemWidth + numSpins * numItems * itemWidth;
+            // --- Winning Logic ---
+            const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
+            const winningItem = config.items[winningIndexInUniqueSet];
+            console.log(`Winning item: #${winningIndexInUniqueSet + 1}`, winningItem);
+
+            // --- Animation Calculation ---
+            // Calculate target position: aim for an item far into the duplicates for smooth stop
+            const targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet; // Target an item in the second to last set of duplicates
+
+            // Calculate base offset to center the *target* item under the marker
+             const containerWidth = caseItemsContainer.parentElement.offsetWidth; // Get container width dynamically
+             const centerOffset = (containerWidth / 2) - (itemWidth / 2);
+
+            // Calculate the total distance to scroll to reach the target item
+            let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
+
+             // Add random variation/jitter to the final position (optional)
+             const jitter = (Math.random() - 0.5) * (itemWidth * 0.4); // Random +/- 20% of item width
+             totalOffset += jitter;
 
 
+            // Calculate dynamic duration
+            const numSpins = config.minSpins + Math.floor(Math.random() * (config.maxSpins - config.minSpins + 1));
+            const duration = config.spinDurationBase + numSpins * config.spinsMultiplier;
+            console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s`);
 
-            caseItemsContainer.style.transition = `transform ${2 + numSpins*0.5}s cubic-bezier(0.2, 0.6, 0, 1)`; 
-            caseItemsContainer.style.transform = `translateX(-${offset}px)`;
+
+             // --- Apply Animation ---
+            caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`; // Smoother easing for stop
+            caseItemsContainer.style.transform = `translateX(-${totalOffset}px)`;
 
 
+            // --- Handle Spin End ---
             setTimeout(() => {
-                resultDisplay.textContent = "Вам выпал номер: #" + (winningIndex + 1) + "!";
-            }, (2000 + numSpins * 500));
+                isSpinning = false;
+                openCaseButton.textContent = "Кейс открыт!"; // Keep disabled until reset or page reload
+                resultDisplay.innerHTML = `Вам выпало: <strong style="color: ${winningItem.rarity ? getRarityColor(winningItem.rarity) : '#f0c419'};">${winningItem.display}</strong>!`;
+
+                 // Show reset button if configured
+                if (config.showResetButton) {
+                    resetButton.style.display = 'inline-block';
+                }
+
+                console.log("Spin finished.");
+            }, duration * 1000); // Timeout matches animation duration
         }
 
+        // Helper to get color based on rarity (customize colors here)
+        function getRarityColor(rarity) {
+            switch (rarity) {
+                case 'common': return '#cccccc';
+                case 'uncommon': return '#aaffaa';
+                case 'rare': return '#aaaaff';
+                case 'epic': return '#ffaafe';
+                case 'legendary': return '#f0c419';
+                default: return '#e0e0e0';
+            }
+        }
+
+        // --- Initialize ---
+        createItems(); // Create items when script loads
+
+         // Optional: Add a listener in case layout changes affect item width
+         window.addEventListener('resize', () => {
+             if (caseItemsContainer.children.length > 0) {
+                 itemWidth = caseItemsContainer.children[0].offsetWidth;
+                 console.log("Item width recalculated on resize:", itemWidth);
+             }
+         });
 
     </script>
 
