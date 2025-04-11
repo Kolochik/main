@@ -39,28 +39,28 @@
             animation: purpleGoldGradientShift 15s ease infinite;
             overflow-x: hidden;
             color: #f0f0f0;
-            padding: 20px; /* Default padding */
+            padding: 20px;
             box-sizing: border-box;
             position: relative;
-            padding-bottom: 60px;
+            padding-bottom: 75px; /* Увеличено место для 2 строк футера */
         }
 
         h1 {
             text-align: center;
             color: #fff;
-            margin-bottom: 25px; /* Slightly less margin */
-            font-size: 2em; /* Default size */
+            margin-bottom: 25px;
+            font-size: 2em;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
         .case-wrapper {
             position: relative;
             width: 100%;
-            max-width: 80vw; /* Default max width */
+            max-width: 80vw;
             margin-bottom: 25px;
         }
 
-        /* Маркеры остаются без изменений */
+        /* Маркеры */
         .case-marker {
             position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
             width: 0; height: 0; border-left: 10px solid transparent;
@@ -74,7 +74,7 @@
 
         .case-container {
             width: 100%;
-            height: 140px; /* Slightly smaller default height */
+            height: 140px;
             overflow: hidden;
             white-space: nowrap;
             background-color: rgba(0, 0, 0, 0.5);
@@ -91,13 +91,15 @@
 
         .case-item {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 140px; /* Slightly smaller default width */
+            width: 140px;
             height: 100%;
             border-right: 1px solid #555;
-            text-align: center; font-size: 20px; /* Adjusted size */
+            text-align: center; font-size: 20px;
             font-weight: bold; box-sizing: border-box; padding: 0 5px;
             vertical-align: top; flex-direction: column; color: #e0e0e0;
             background-color: #333;
+            word-break: break-word; /* Добавлено для переноса текста */
+            line-height: 1.2; /* Слегка уменьшено для компактности при переносе */
         }
         /* Rarity colors */
         .case-item.common { background-color: #444; color: #ccc; }
@@ -110,9 +112,9 @@
 
         button#openCaseButton {
             background-color: #c89600; color: #333;
-            padding: 10px 20px; /* Slightly smaller padding */
+            padding: 10px 20px;
             border: none; border-radius: 5px; cursor: pointer;
-            font-size: 16px; /* Adjusted size */
+            font-size: 16px;
             font-weight: bold; margin-bottom: 15px;
             transition: background-color 0.3s ease, transform 0.1s ease;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
@@ -127,9 +129,9 @@
         #result { display: none; }
 
         #instructions, #bot-link {
-            font-size: 15px; /* Slightly smaller text */
+            font-size: 15px;
             color: #ddd; text-align: center;
-            max-width: 90%; /* Allow wider text on mobile */
+            max-width: 90%;
             line-height: 1.4;
         }
          #bot-link { margin-top: 5px; }
@@ -147,10 +149,10 @@
             position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background-color: #e8e8e8; color: #333;
-            padding: 20px 25px; /* Reduced padding */
+            padding: 20px 25px;
             border: 3px solid #888; border-radius: 10px;
-            width: 90%; /* Default responsive width */
-            max-width: 450px; /* Default max width */
+            width: 90%;
+            max-width: 450px;
             text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             animation: modalFadeIn 0.4s ease-out forwards;
         }
@@ -166,26 +168,27 @@
 
         .modal-content h2 {
             margin-top: 0; margin-bottom: 15px;
-            font-size: 1.8em; /* Reduced size */
+            font-size: 1.8em;
             font-weight: bold;
+            word-break: break-word; /* Добавлено и сюда на всякий случай */
         }
         .modal-instruction {
-            font-size: 1em; /* Reduced size */
+            font-size: 1em;
             margin-bottom: 20px; color: #555;
         }
         .modal-bot-button {
             display: inline-block; background-color: #5865F2; color: #fff;
-            padding: 10px 20px; /* Reduced padding */
+            padding: 10px 20px;
             border-radius: 5px; text-decoration: none;
-            font-weight: bold; font-size: 1em; /* Reduced size */
+            font-weight: bold; font-size: 1em;
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
         .modal-bot-button:hover { background-color: #4752C4; transform: scale(1.02); }
          .modal-bot-button:active { transform: scale(0.98); }
 
         .close-button {
-            color: #aaa; position: absolute; top: 5px; right: 10px; /* Closer */
-            font-size: 24px; /* Slightly smaller */
+            color: #aaa; position: absolute; top: 5px; right: 10px;
+            font-size: 24px;
             font-weight: bold; cursor: pointer; line-height: 1;
         }
         .close-button:hover, .close-button:focus { color: #333; }
@@ -193,84 +196,46 @@
         /* --- Футер --- */
         footer {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            text-align: center; padding: 10px 0; /* Less padding */
-            color: rgba(255, 255, 255, 0.6); font-size: 13px; /* Smaller */
+            text-align: center; padding: 10px 0;
+            color: rgba(255, 255, 255, 0.6); font-size: 13px;
+        }
+        /* Стиль для версии */
+        .footer-version {
+            display: block; /* Чтобы было на новой строке */
+            margin-top: 3px; /* Небольшой отступ сверху */
+            font-size: 0.8em; /* Меньший размер шрифта */
+            color: rgba(255, 255, 255, 0.4); /* Еще более бледный цвет */
         }
 
         /* --- АДАПТИВНОСТЬ --- */
-
-        /* Планшеты и телефоны (ландшафт) */
         @media (max-width: 768px) {
-            body {
-                padding: 15px; /* Less padding */
-                padding-bottom: 50px; /* Keep space for footer */
-            }
-             h1 {
-                 font-size: 1.8em; /* Smaller title */
-                 margin-bottom: 20px;
-             }
-            .case-wrapper {
-                max-width: 90vw; /* Slightly wider */
-                margin-bottom: 20px;
-            }
-            .case-container {
-                 height: 120px; /* Smaller height */
-            }
-             .case-item {
-                 width: 120px; /* Slightly smaller width */
-                 font-size: 18px;
-             }
-              button#openCaseButton {
-                  font-size: 15px;
-                  padding: 10px 18px;
-              }
-            .modal-content {
-                max-width: 400px;
-                padding: 15px 20px;
-            }
+            body { padding: 15px; padding-bottom: 65px; }
+             h1 { font-size: 1.8em; margin-bottom: 20px; }
+            .case-wrapper { max-width: 90vw; margin-bottom: 20px; }
+            .case-container { height: 120px; }
+             .case-item { width: 120px; font-size: 18px; }
+              button#openCaseButton { font-size: 15px; padding: 10px 18px; }
+            .modal-content { max-width: 400px; padding: 15px 20px; }
             .modal-content h2 { font-size: 1.6em; }
             .modal-instruction { font-size: 0.95em; margin-bottom: 15px; }
             .modal-bot-button { font-size: 0.95em; padding: 9px 18px; }
             footer { font-size: 12px; padding: 8px 0;}
         }
-
-        /* Телефоны (портрет) */
         @media (max-width: 480px) {
-             body {
-                padding: 10px; /* Even less padding */
-                padding-bottom: 45px;
-            }
-             h1 {
-                 font-size: 1.5em; /* Smaller title */
-                 margin-bottom: 15px;
-             }
-             .case-wrapper {
-                 max-width: 95vw; /* Almost full width */
-                 margin-bottom: 15px;
-             }
-             .case-container {
-                 height: 110px; /* Smaller height */
-            }
-             .case-item {
-                 width: 100px; /* Smaller items */
-                 font-size: 15px;
-             }
-             button#openCaseButton {
-                 font-size: 14px;
-                 padding: 8px 15px;
-             }
-              #instructions, #bot-link {
-                 font-size: 14px;
-             }
-             .modal-content {
-                 width: 92%;
-                 max-width: 300px; /* Limit max width */
-                 padding: 15px;
-             }
+             body { padding: 10px; padding-bottom: 60px; }
+             h1 { font-size: 1.5em; margin-bottom: 15px; }
+             .case-wrapper { max-width: 95vw; margin-bottom: 15px; }
+             .case-container { height: 110px; }
+             .case-item { width: 100px; font-size: 15px; } /* Уменьшен размер текста */
+             button#openCaseButton { font-size: 14px; padding: 8px 15px; }
+              #instructions, #bot-link { font-size: 14px; }
+             .modal-content { width: 92%; max-width: 300px; padding: 15px; }
              .modal-content h2 { font-size: 1.4em; margin-bottom: 10px;}
              .modal-instruction { font-size: 0.9em; margin-bottom: 15px;}
              .modal-bot-button { font-size: 0.9em; padding: 8px 15px; }
              footer { font-size: 11px; padding: 6px 0;}
+             /* Можно добавить еще более мелкий шрифт для спец. итемов если 15px мало */
+             /* .case-item.rare, .case-item.epic, .case-item.legendary { font-size: 13px; } */
         }
 
     </style>
@@ -305,7 +270,8 @@
     </div>
 
     <footer>
-        © Project MIxVine 2024
+        <span>© Project MIxVine 2024</span>
+        <span class="footer-version">ver. web2Global</span> <!-- Добавлена версия -->
     </footer>
 
 
@@ -369,19 +335,21 @@
             }
 
             // Determine item width from CSS for the current screen size
-            // Create a temporary item to measure, then remove it
             let tempItemDiv = document.createElement('div');
             tempItemDiv.classList.add('case-item');
-            tempItemDiv.style.visibility = 'hidden'; // Don't show it
+            tempItemDiv.style.visibility = 'hidden';
             caseItemsContainer.appendChild(tempItemDiv);
-            itemWidth = tempItemDiv.offsetWidth; // Get calculated width
-            caseItemsContainer.removeChild(tempItemDiv); // Clean up
+            itemWidth = tempItemDiv.offsetWidth;
+            caseItemsContainer.removeChild(tempItemDiv);
 
             console.log("Item width calculated:", itemWidth);
 
             if (itemWidth === 0) {
-                console.error("Could not determine item width! Using default.");
-                itemWidth = 100; // Fallback width if calculation fails
+                console.error("Could not determine item width! Using fallback.");
+                // Пытаемся получить ширину из CSS переменной или задать значение по умолчанию
+                const fallbackWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--case-item-width-fallback') || '100');
+                itemWidth = fallbackWidth;
+                console.warn("Using fallback width:", itemWidth);
             }
 
 
@@ -389,8 +357,7 @@
             itemsToRender.forEach(itemData => {
                 let itemDiv = document.createElement('div');
                 itemDiv.classList.add('case-item');
-                 // Apply explicit width based on calculation - helps consistency
-                // itemDiv.style.width = `${itemWidth}px`; // Optional: Force width if CSS media queries change it unexpectedly
+                // itemDiv.style.width = `${itemWidth}px`; // Optional
 
                 if (itemData.rarity) {
                     itemDiv.classList.add(itemData.rarity);
@@ -404,7 +371,7 @@
         }
 
 
-        // --- Показ модального окна (теперь для всех) ---
+        // --- Показ модального окна ---
         function showWinModal(item) {
             winItemTitle.textContent = item.display;
             winItemTitle.style.color = getRarityColorHex(item.rarity);
@@ -432,7 +399,6 @@
 
         // --- MAIN SPIN FUNCTION ---
         function openCase() {
-            // Recalculate itemWidth just in case, if items weren't ready before
             if (itemWidth === 0 && itemsGenerated) {
                  let currentItemWidth = caseItemsContainer.children.length > 0 ? caseItemsContainer.children[0].offsetWidth : 0;
                  if (currentItemWidth > 0) {
@@ -440,7 +406,6 @@
                      console.log("Item width re-calculated:", itemWidth);
                  }
             }
-
 
             if (isSpinning || !itemsGenerated || itemWidth === 0 || hasOpenedOnce) {
                 console.warn("Spin prevented: Conditions not met.", {isSpinning, itemsGenerated, itemWidth, hasOpenedOnce});
@@ -474,10 +439,9 @@
                 targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
              }
 
-            // Use parentElement.offsetWidth for accurate container width including padding/borders
             const containerWidth = caseItemsContainer.parentElement.offsetWidth;
-            const centerOffset = (containerWidth / 2) - (itemWidth / 2); // Use calculated itemWidth
-            let totalOffset = (targetItemIndex * itemWidth) - centerOffset; // Use calculated itemWidth
+            const centerOffset = (containerWidth / 2) - (itemWidth / 2);
+            let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
             const jitter = (Math.random() - 0.5) * (itemWidth * 0.1);
             totalOffset += jitter;
 
@@ -497,7 +461,7 @@
             }, duration * 1000);
         }
 
-        // Helper to get HEX color based on rarity (for text mostly)
+        // Helper to get HEX color based on rarity
         function getRarityColorHex(rarity) {
             switch (rarity) {
                 case 'common': return '#aaaaaa';
@@ -510,25 +474,26 @@
         }
 
         // --- Initialize ---
-        // setupItems will calculate width based on current CSS
         setupItems();
 
-        // Optional: Recalculate on resize if the layout changes significantly
         let resizeTimeout;
         window.addEventListener('resize', () => {
-             // Debounce resize event to avoid excessive calculations
              clearTimeout(resizeTimeout);
              resizeTimeout = setTimeout(() => {
                  console.log("Window resized, recalculating item width...");
-                 // Recalculate width on resize
                  if (caseItemsContainer.children.length > 0 && !isSpinning) {
-                    itemWidth = caseItemsContainer.children[0].offsetWidth;
-                    console.log("Item width recalculated on resize:", itemWidth);
+                    // Re-measure item width after styles might have changed
+                    let currentItemWidth = caseItemsContainer.children[0].offsetWidth;
+                     if (currentItemWidth > 0) {
+                        itemWidth = currentItemWidth;
+                        console.log("Item width recalculated on resize:", itemWidth);
+                     } else {
+                         console.warn("Could not measure item width on resize.");
+                     }
                  } else if (!itemsGenerated) {
-                     // If items weren't generated yet, try generating them now
                      setupItems();
                  }
-             }, 250); // Wait 250ms after last resize event
+             }, 250);
          });
 
     </script>
