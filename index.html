@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Special Case</title>
+    <title>MixVine Gold Case</title>
     <style>
         /* Анимация для фона */
-        @keyframes gradientShift {
+        @keyframes darkGoldGradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -18,28 +18,38 @@
             to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
+        /* Анимация для спецэффекта (например, пульсация тени) */
+        @keyframes specialGlow {
+            0% { box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.5); } /* Gold glow */
+            50% { box-shadow: 0 0 30px 10px rgba(255, 223, 0, 0.8); }
+            100% { box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.5); }
+        }
+
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Центрируем основной контент */
             min-height: 100vh;
-            /* Анимированный фон */
-            background: linear-gradient(-45deg, #f0c419, #ffea00, #f5bd1f, #ffd700);
+            /* Темно-золотой анимированный фон */
+            background: linear-gradient(-45deg, #b48a00, #c89600, #a98600, #8b6914); /* Dark gold tones */
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            animation: darkGoldGradientShift 15s ease infinite;
             overflow-x: hidden;
-            color: #333; /* Text color suitable for yellow bg */
+            color: #f0f0f0; /* Светлый текст для темного фона */
             padding: 20px;
             box-sizing: border-box;
+            position: relative; /* Для позиционирования футера */
+            padding-bottom: 60px; /* Оставляем место для футера */
         }
 
         h1 {
             text-align: center;
-            color: #4a235a; /* Dark purple title for contrast */
+            color: #fff; /* Белый заголовок */
             margin-bottom: 30px;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
         .case-wrapper {
@@ -58,7 +68,7 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 15px solid #4a235a; /* Dark purple marker */
+            border-top: 15px solid #fff; /* White marker */
             z-index: 10;
         }
          .case-marker-line {
@@ -68,9 +78,9 @@
              transform: translateX(-50%);
              width: 3px;
              height: 100%;
-             background-color: rgba(74, 35, 90, 0.7); /* Semi-transparent dark purple */
+             background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
              z-index: 5;
-             box-shadow: 0 0 5px rgba(74, 35, 90, 0.5);
+             box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         .case-container {
@@ -78,8 +88,8 @@
             height: 150px;
             overflow: hidden;
             white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0.4); /* Darker overlay for contrast */
-            border: 2px solid #666; /* Darker border */
+            background-color: rgba(0, 0, 0, 0.5); /* Darker overlay */
+            border: 2px solid #777; /* Grey border */
             border-radius: 5px;
             position: relative;
         }
@@ -94,61 +104,44 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 150px; /* Slightly wider items */
+            width: 150px;
             height: 100%;
             border-right: 1px solid #555;
             text-align: center;
-            font-size: 22px; /* Larger font for numbers */
+            font-size: 22px;
             font-weight: bold;
             box-sizing: border-box;
             padding: 0 5px;
             vertical-align: top;
             flex-direction: column;
-            color: #e0e0e0; /* Default text color */
-            background-color: #444; /* Default background */
+            color: #e0e0e0;
+            background-color: #333; /* Darker item background */
         }
-        /* Rarity colors - ADJUSTED */
-        .case-item.common { background-color: #555; color: #ccc; }
-        .case-item.uncommon { background-color: #4a5a40; color: #aaffaa; } /* Kept for potential future use */
+        /* Rarity colors */
+        .case-item.common { background-color: #444; color: #ccc; }
         .case-item.rare { background-color: #2980b9; color: #fff; } /* BLUE */
         .case-item.epic { background-color: #8e44ad; color: #fff; } /* PURPLE */
         .case-item.legendary {
-            /* GOLD GRADIENT */
             background-image: linear-gradient(45deg, #f1c40f, #f39c12, #e67e22);
-            color: #333; /* Dark text for gold bg */
+            color: #333;
             font-weight: bold;
         }
 
-        /* Image/Text styles within item (if needed) */
-        .case-item img {
-            max-width: 90%;
-            max-height: 65%;
-            display: block;
-            margin-bottom: 5px;
-            object-fit: contain;
-        }
-        .case-item span { /* For special items with text below image */
-             display: block;
-             font-size: 14px;
-             margin-top: auto;
-             line-height: 1.2;
-             padding-bottom: 5px;
-        }
-
         button#openCaseButton {
-            background-color: #8e44ad; /* Purple button */
-            color: white;
+            background-color: #c89600; /* Gold button */
+            color: #333; /* Dark text on gold */
             padding: 12px 25px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
+            font-weight: bold;
             margin-bottom: 15px;
             transition: background-color 0.3s ease, transform 0.1s ease;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
         }
         button#openCaseButton:hover:not(:disabled) {
-            background-color: #7d3c98;
+            background-color: #b48a00;
         }
         button#openCaseButton:active:not(:disabled) {
             transform: scale(0.98);
@@ -160,24 +153,23 @@
             text-shadow: none;
         }
 
+        /* Скрываем стандартный текстовый результат, так как будет модальное окно */
         #result {
-            font-size: 26px;
-            font-weight: bold;
-            color: #4a235a; /* Dark purple result text */
-            margin-bottom: 15px;
-            min-height: 30px;
-            text-align: center;
+           display: none;
         }
 
         #instructions, #bot-link {
             font-size: 16px;
-            color: #444; /* Darker text for yellow bg */
+            color: #ddd; /* Lighter grey text */
             text-align: center;
             max-width: 600px;
             line-height: 1.5;
         }
+         #bot-link {
+            margin-top: 5px; /* Add space above link if needed */
+         }
         #bot-link a {
-            color: #2980b9; /* Blue link */
+            color: #f1c40f; /* Gold link */
             text-decoration: none;
             font-weight: bold;
         }
@@ -185,67 +177,117 @@
              text-decoration: underline;
          }
 
-        /* --- МОДАЛЬНОЕ ОКНО --- */
+        /* --- МОДАЛЬНОЕ ОКНО (Общее для всех) --- */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 100;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* Darker overlay */
         }
 
         .modal-content {
-            position: fixed; /* Use fixed to easily center */
+            position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Center trick */
-            background-color: #fefefe;
-            padding: 30px 40px;
-            border: 5px solid; /* Border color set by JS */
+            transform: translate(-50%, -50%);
+            background-color: #e8e8e8; /* Light gray background */
+            color: #333; /* Dark text for modal */
+            padding: 25px 35px;
+            border: 3px solid #888; /* Default border */
             border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
+            width: 90%; /* Responsive width */
+            max-width: 450px; /* Max width */
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: modalFadeIn 0.5s ease-out forwards; /* Apply animation */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            animation: modalFadeIn 0.4s ease-out forwards;
         }
 
-        .modal-content h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 2.5em; /* Large title */
+        /* Класс для спецэффекта */
+        .modal-content.special-effect {
+             animation: modalFadeIn 0.4s ease-out forwards, specialGlow 1.5s ease-in-out infinite alternate; /* Add glow animation */
+             border-width: 5px; /* Make border thicker */
         }
-         /* Style based on rarity */
+
+
+        /* Стилизация рамки по рарности */
+         .modal-content.common-win { border-color: #777; }
+         .modal-content.uncommon-win { border-color: #4a5a40; } /* Just in case */
          .modal-content.rare-win { border-color: #2980b9; }
          .modal-content.epic-win { border-color: #8e44ad; }
          .modal-content.legendary-win { border-color: #f39c12; }
 
 
+        .modal-content h2 { /* Заголовок с выпавшим предметом */
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            font-weight: bold;
+            /* Цвет будет установлен JS */
+        }
+
+        .modal-instruction { /* Текст про скриншот */
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .modal-bot-button { /* Кнопка-ссылка на бота */
+            display: inline-block;
+            background-color: #5865F2; /* Discord-like purple/blue */
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .modal-bot-button:hover {
+            background-color: #4752C4;
+            transform: scale(1.02);
+        }
+         .modal-bot-button:active {
+             transform: scale(0.98);
+         }
+
+
         .close-button {
             color: #aaa;
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
+            top: 8px;
+            right: 12px;
+            font-size: 26px;
             font-weight: bold;
             cursor: pointer;
+            line-height: 1;
         }
-
         .close-button:hover,
         .close-button:focus {
-            color: black;
-            text-decoration: none;
+            color: #333;
+        }
+
+        /* --- Футер --- */
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+            font-size: 14px;
         }
 
     </style>
 </head>
 <body>
 
-    <h1>Крути особый кейс MixVine!</h1>
+    <h1>Крути золотой кейс MixVine!</h1>
 
     <div class="case-wrapper">
         <div class="case-marker"></div>
@@ -258,24 +300,28 @@
     </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
-    <div id="result"></div>
-    <div id="instructions">Если выпадет особый номер, появится окно с поздравлением! Скопируйте ваш выигрыш и сообщите его в телеграм боте.</div>
-    <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Перейти к боту MixVine</a></div>
+    <div id="result"></div> <!-- Этот блок теперь скрыт через CSS -->
+    <div id="instructions">Нажмите "Открыть кейс", чтобы испытать удачу!</div> <!-- Обновил текст инструкции -->
+    <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Связаться с ботом MixVine</a></div>
 
-    <!-- HTML Модального Окна -->
-    <div id="specialWinModal" class="modal">
-        <div class="modal-content" id="modalContent">
-            <span class="close-button" id="closeModalButton">&times;</span>
-            <h2 id="specialWinTitle"></h2>
-            <p style="font-size: 1.2em;">🎉 Поздравляем с особым выигрышем! 🎉</p>
+    <!-- HTML Модального Окна (единое) -->
+    <div id="winModal" class="modal">
+        <div class="modal-content" id="winModalContent">
+            <span class="close-button" id="winModalCloseButton">&times;</span>
+            <h2 id="winItemTitle"></h2> <!-- Заголовок для названия предмета -->
+            <p class="modal-instruction">Заскринь экран и скинь его телеграм боту</p>
+            <a href="https://t.me/mixvinebot" target="_blank" class="modal-bot-button">Перейти к боту</a>
         </div>
     </div>
+
+    <footer>
+        © Project MIxVine 2024
+    </footer>
 
 
     <script>
         // --- КОНФИГУРАЦИЯ ---
         const config = {
-            // Предметы: #1-#17 (common) + 3 специальных
             items: [
                 // Специальные предметы
                 { display: "Rare Number #1", rarity: "rare", special: true },
@@ -291,10 +337,8 @@
                 { display: "#13", rarity: "common" }, { display: "#14", rarity: "common" },
                 { display: "#15", rarity: "common" }, { display: "#16", rarity: "common" },
                 { display: "#17", rarity: "common" },
-                 // Добавим еще немного обычных для лучшего распределения
-                 { display: "#18", rarity: "common" }, { display: "#19", rarity: "common" },
-                 { display: "#20", rarity: "common" },
-
+                { display: "#18", rarity: "common" }, { display: "#19", rarity: "common" },
+                { display: "#20", rarity: "common" },
             ],
             numberOfDuplicates: 5,
             spinDurationBase: 5,
@@ -304,22 +348,21 @@
         };
         // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
-        // Перемешиваем массив предметов один раз при загрузке для большей случайности
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        shuffleArray(config.items); // Перемешать основной массив
+        shuffleArray(config.items);
 
         const caseItemsContainer = document.getElementById('caseItems');
         const openCaseButton = document.getElementById('openCaseButton');
-        const resultDisplay = document.getElementById('result');
-        const specialWinModal = document.getElementById('specialWinModal');
-        const modalContent = document.getElementById('modalContent');
-        const specialWinTitle = document.getElementById('specialWinTitle');
-        const closeModalButton = document.getElementById('closeModalButton');
+        // const resultDisplay = document.getElementById('result'); // Не используем напрямую
+        const winModal = document.getElementById('winModal');
+        const winModalContent = document.getElementById('winModalContent');
+        const winItemTitle = document.getElementById('winItemTitle');
+        const winModalCloseButton = document.getElementById('winModalCloseButton');
 
         const numUniqueItems = config.items.length;
 
@@ -328,17 +371,14 @@
         let itemsGenerated = false;
         let hasOpenedOnce = false;
 
-        // Function to create item elements
         function createItems() {
             caseItemsContainer.innerHTML = '';
             const fragment = document.createDocumentFragment();
             const itemsToRender = [];
 
-            // Создаем полный набор (оригиналы + дубликаты)
-             for (let d = 0; d <= config.numberOfDuplicates; d++) {
-                itemsToRender.push(...config.items); // Добавляем копию основного массива
+            for (let d = 0; d <= config.numberOfDuplicates; d++) {
+                itemsToRender.push(...config.items);
             }
-
 
             itemsToRender.forEach(itemData => {
                 let itemDiv = document.createElement('div');
@@ -346,45 +386,46 @@
                 if (itemData.rarity) {
                     itemDiv.classList.add(itemData.rarity);
                 }
-
-                // Use text content directly for all items now
-                 itemDiv.textContent = itemData.display;
-
+                itemDiv.textContent = itemData.display;
                 fragment.appendChild(itemDiv);
             });
 
             caseItemsContainer.appendChild(fragment);
 
             if (caseItemsContainer.children.length > 0) {
-                 caseItemsContainer.offsetHeight; // Force reflow
+                 caseItemsContainer.offsetHeight;
                 itemWidth = caseItemsContainer.children[0].offsetWidth;
                  console.log("Item width calculated:", itemWidth);
             }
-
             itemsGenerated = true;
         }
 
-        // --- Показ модального окна ---
-        function showSpecialWin(item) {
-            specialWinTitle.textContent = item.display;
-            // Устанавливаем цвет рамки в зависимости от рарности
-            modalContent.classList.remove('rare-win', 'epic-win', 'legendary-win'); // Сначала убираем старые классы
-            modalContent.classList.add(item.rarity + '-win');
+        // --- Показ модального окна (теперь для всех) ---
+        function showWinModal(item) {
+            winItemTitle.textContent = item.display; // Устанавливаем текст заголовка
+            winItemTitle.style.color = getRarityColorHex(item.rarity); // Устанавливаем цвет заголовка
 
-            specialWinModal.style.display = "block"; // Показать модальное окно
+            // Управляем классами для рамки и спецэффекта
+            winModalContent.className = 'modal-content'; // Сбрасываем классы до базового
+            winModalContent.classList.add(item.rarity + '-win'); // Добавляем класс рарности для рамки
+
+            if (item.special) {
+                winModalContent.classList.add('special-effect'); // Добавляем класс спецэффекта
+                console.log("Special win effect added for:", item.display);
+            }
+
+            winModal.style.display = "block"; // Показать модальное окно
         }
 
         // --- Закрытие модального окна ---
-        closeModalButton.onclick = function() {
-            specialWinModal.style.display = "none";
+        winModalCloseButton.onclick = function() {
+            winModal.style.display = "none";
         }
-        // Закрытие по клику вне окна
         window.onclick = function(event) {
-            if (event.target == specialWinModal) {
-                specialWinModal.style.display = "none";
+            if (event.target == winModal) {
+                winModal.style.display = "none";
             }
         }
-
 
         // --- MAIN SPIN FUNCTION ---
         function openCase() {
@@ -397,47 +438,39 @@
             isSpinning = true;
             openCaseButton.disabled = true;
             openCaseButton.textContent = "Крутится...";
-            resultDisplay.textContent = ""; // Очистить предыдущий результат
+            // resultDisplay.textContent = ""; // Не нужно, т.к. скрыт
 
-            // --- Winning Logic ---
             const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
-            const winningItem = config.items[winningIndexInUniqueSet]; // Получаем предмет из *оригинального* перемешанного массива
+            const winningItem = config.items[winningIndexInUniqueSet];
             console.log(`Winning item: #${winningIndexInUniqueSet + 1}`, winningItem);
 
-            // --- Animation Calculation ---
-            // Ищем первое вхождение этого ВЫИГРАВШЕГО предмета где-то в середине дубликатов
             let targetItemIndex = -1;
-            const startIndexToSearch = Math.floor(config.numberOfDuplicates / 2) * numUniqueItems; // Начинаем поиск с середины дубликатов
+            const startIndexToSearch = Math.floor(config.numberOfDuplicates / 2) * numUniqueItems;
             const allRenderedItems = Array.from(caseItemsContainer.children);
 
             for(let i = startIndexToSearch; i < allRenderedItems.length; i++) {
-                 // Сравниваем по display И rarity, чтобы найти точное совпадение
                  const renderedItemText = allRenderedItems[i].textContent;
                  const hasCorrectRarityClass = winningItem.rarity ? allRenderedItems[i].classList.contains(winningItem.rarity) : true;
-
                 if (renderedItemText === winningItem.display && hasCorrectRarityClass) {
                     targetItemIndex = i;
                     break;
                 }
             }
-
-             if (targetItemIndex === -1) { // Fallback если не нашли (маловероятно)
-                 console.warn("Could not find exact winning item in duplicates, using original index logic.");
+             if (targetItemIndex === -1) {
+                console.warn("Could not find exact winning item in duplicates, using original index logic.");
                 targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
              }
-
 
             const containerWidth = caseItemsContainer.parentElement.offsetWidth;
             const centerOffset = (containerWidth / 2) - (itemWidth / 2);
             let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
-            const jitter = (Math.random() - 0.5) * (itemWidth * 0.1); // Уменьшил джиттер для точности
+            const jitter = (Math.random() - 0.5) * (itemWidth * 0.1);
             totalOffset += jitter;
 
             const numSpins = config.minSpins + Math.floor(Math.random() * (config.maxSpins - config.minSpins + 1));
             const duration = config.spinDurationBase + numSpins * config.spinsMultiplier;
             console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s, Target Index: ${targetItemIndex}`);
 
-             // --- Apply Animation ---
             caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`;
             caseItemsContainer.style.transform = `translateX(-${totalOffset}px)`;
 
@@ -446,35 +479,27 @@
                 isSpinning = false;
                 openCaseButton.textContent = "Кейс открыт!";
 
-                // Показываем результат или модальное окно
-                if (winningItem.special) {
-                    // Показываем модальное окно для особого приза
-                    showSpecialWin(winningItem);
-                    // Можно также обновить основной текст результата
-                    resultDisplay.innerHTML = `Вы выиграли <strong style="color: ${getRarityColor(winningItem.rarity)};">${winningItem.display}</strong>!`;
-                } else {
-                    // Показываем обычный результат
-                    resultDisplay.innerHTML = `Вам выпало: <strong style="color: ${getRarityColor(winningItem.rarity)};">${winningItem.display}</strong>!`;
-                }
+                // Показываем модальное окно ВСЕГДА
+                showWinModal(winningItem);
 
                 console.log("Spin finished.");
             }, duration * 1000);
         }
 
-        // Helper to get color based on rarity (CSS color value)
-        function getRarityColor(rarity) {
+        // Helper to get HEX color based on rarity (for text mostly)
+        function getRarityColorHex(rarity) {
             switch (rarity) {
-                case 'common': return '#cccccc';
-                case 'uncommon': return '#aaffaa';
-                case 'rare': return '#2980b9'; // Blue
-                case 'epic': return '#8e44ad'; // Purple
-                case 'legendary': return '#e67e22'; // Gold/Orange part of gradient
-                default: return '#333'; // Default dark text color
+                case 'common': return '#aaaaaa'; // Light grey
+                case 'uncommon': return '#88cc88'; // Light green
+                case 'rare': return '#5dade2'; // Brighter Blue
+                case 'epic': return '#af7ac5'; // Brighter Purple
+                case 'legendary': return '#f39c12'; // Gold/Orange
+                default: return '#333333'; // Default dark text
             }
         }
 
         // --- Initialize ---
-        createItems(); // Create items when script loads
+        createItems();
 
          window.addEventListener('resize', () => {
              if (caseItemsContainer.children.length > 0 && !isSpinning) {
