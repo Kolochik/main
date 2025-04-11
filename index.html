@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Free Case - Final</title>
+    <title>MixVine Special Case</title>
     <style>
+        /* Анимация для фона */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимация для появления модального окна */
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -12,20 +25,21 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #1a1a1d;
-            background-image: linear-gradient(135deg, #1a1a1d 0%, #333338 100%);
-            background-size: cover;
+            /* Анимированный фон */
+            background: linear-gradient(-45deg, #f0c419, #ffea00, #f5bd1f, #ffd700);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             overflow-x: hidden;
-            color: #e0e0e0;
+            color: #333; /* Text color suitable for yellow bg */
             padding: 20px;
             box-sizing: border-box;
         }
 
         h1 {
             text-align: center;
-            color: #f0c419;
+            color: #4a235a; /* Dark purple title for contrast */
             margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
 
         .case-wrapper {
@@ -44,7 +58,7 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 15px solid #f0c419;
+            border-top: 15px solid #4a235a; /* Dark purple marker */
             z-index: 10;
         }
          .case-marker-line {
@@ -53,71 +67,76 @@
              left: 50%;
              transform: translateX(-50%);
              width: 3px;
-             height: 100%; /* Takes full height of parent */
-             background-color: rgba(240, 196, 25, 0.7);
+             height: 100%;
+             background-color: rgba(74, 35, 90, 0.7); /* Semi-transparent dark purple */
              z-index: 5;
-             box-shadow: 0 0 5px rgba(240, 196, 25, 0.5);
+             box-shadow: 0 0 5px rgba(74, 35, 90, 0.5);
         }
 
         .case-container {
             width: 100%;
-            height: 150px; /* <--- Высота контейнера кейса */
+            height: 150px;
             overflow: hidden;
             white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 2px solid #444;
+            background-color: rgba(0, 0, 0, 0.4); /* Darker overlay for contrast */
+            border: 2px solid #666; /* Darker border */
             border-radius: 5px;
             position: relative;
         }
 
         .case-items {
             display: inline-block;
-            height: 100%; /* Make sure items container also takes full height */
+            height: 100%;
             transition: transform 5s cubic-bezier(0.1, 0.6, 0.1, 1);
         }
 
         .case-item {
-            display: inline-flex; /* Use flex for content centering */
-            align-items: center; /* Vertically center content */
-            justify-content: center; /* Horizontally center content */
-            width: 120px;
-            height: 100%; /* <--- Ячейка занимает 100% высоты контейнера */
-            background-color: #28282d;
-            border-right: 1px solid #444;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px; /* Slightly wider items */
+            height: 100%;
+            border-right: 1px solid #555;
             text-align: center;
-            font-size: 18px;
+            font-size: 22px; /* Larger font for numbers */
             font-weight: bold;
-            color: #e0e0e0;
             box-sizing: border-box;
-            padding: 0 5px; /* Remove vertical padding, keep horizontal */
-            vertical-align: top; /* Align boxes themselves at the top */
-            flex-direction: column; /* Stack image and text vertically */
+            padding: 0 5px;
+            vertical-align: top;
+            flex-direction: column;
+            color: #e0e0e0; /* Default text color */
+            background-color: #444; /* Default background */
         }
-        /* Rarity colors */
-        .case-item.common { background-color: #3a3a40; color: #ccc; }
-        .case-item.uncommon { background-color: #4a5a40; color: #aaffaa; }
-        .case-item.rare { background-color: #404a7a; color: #aaaaff; }
-        .case-item.epic { background-color: #6a407a; color: #ffaafe; }
-        .case-item.legendary { background-color: #7a6a40; color: #f0c419; }
+        /* Rarity colors - ADJUSTED */
+        .case-item.common { background-color: #555; color: #ccc; }
+        .case-item.uncommon { background-color: #4a5a40; color: #aaffaa; } /* Kept for potential future use */
+        .case-item.rare { background-color: #2980b9; color: #fff; } /* BLUE */
+        .case-item.epic { background-color: #8e44ad; color: #fff; } /* PURPLE */
+        .case-item.legendary {
+            /* GOLD GRADIENT */
+            background-image: linear-gradient(45deg, #f1c40f, #f39c12, #e67e22);
+            color: #333; /* Dark text for gold bg */
+            font-weight: bold;
+        }
 
-        /* Style for images inside items */
+        /* Image/Text styles within item (if needed) */
         .case-item img {
-            max-width: 90%; /* Allow slightly larger image */
-            max-height: 65%; /* Adjust max height as needed */
+            max-width: 90%;
+            max-height: 65%;
             display: block;
-            margin-bottom: 5px; /* Space between image and text */
-            object-fit: contain; /* Ensure image scales nicely */
+            margin-bottom: 5px;
+            object-fit: contain;
         }
-        .case-item span {
+        .case-item span { /* For special items with text below image */
              display: block;
              font-size: 14px;
-             margin-top: auto; /* Push text towards bottom */
-             line-height: 1.2; /* Adjust line height for text */
-             padding-bottom: 5px; /* Add some padding at the bottom */
+             margin-top: auto;
+             line-height: 1.2;
+             padding-bottom: 5px;
         }
 
         button#openCaseButton {
-            background-color: #4CAF50;
+            background-color: #8e44ad; /* Purple button */
             color: white;
             padding: 12px 25px;
             border: none;
@@ -126,9 +145,10 @@
             font-size: 18px;
             margin-bottom: 15px;
             transition: background-color 0.3s ease, transform 0.1s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
         button#openCaseButton:hover:not(:disabled) {
-            background-color: #45a049;
+            background-color: #7d3c98;
         }
         button#openCaseButton:active:not(:disabled) {
             transform: scale(0.98);
@@ -137,12 +157,13 @@
             background-color: #666;
             color: #bbb;
             cursor: not-allowed;
+            text-shadow: none;
         }
 
         #result {
             font-size: 26px;
             font-weight: bold;
-            color: #f0c419;
+            color: #4a235a; /* Dark purple result text */
             margin-bottom: 15px;
             min-height: 30px;
             text-align: center;
@@ -150,26 +171,81 @@
 
         #instructions, #bot-link {
             font-size: 16px;
-            color: #ccc;
+            color: #444; /* Darker text for yellow bg */
             text-align: center;
             max-width: 600px;
             line-height: 1.5;
         }
         #bot-link a {
-            color: #6bbdff;
+            color: #2980b9; /* Blue link */
             text-decoration: none;
+            font-weight: bold;
         }
          #bot-link a:hover {
              text-decoration: underline;
          }
 
-        /* Reset button CSS removed */
+        /* --- МОДАЛЬНОЕ ОКНО --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            position: fixed; /* Use fixed to easily center */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center trick */
+            background-color: #fefefe;
+            padding: 30px 40px;
+            border: 5px solid; /* Border color set by JS */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.5s ease-out forwards; /* Apply animation */
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 2.5em; /* Large title */
+        }
+         /* Style based on rarity */
+         .modal-content.rare-win { border-color: #2980b9; }
+         .modal-content.epic-win { border-color: #8e44ad; }
+         .modal-content.legendary-win { border-color: #f39c12; }
+
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
 
     </style>
 </head>
 <body>
 
-    <h1>Крути кейс от MixVine Project!</h1>
+    <h1>Крути особый кейс MixVine!</h1>
 
     <div class="case-wrapper">
         <div class="case-marker"></div>
@@ -182,89 +258,101 @@
     </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
-    <!-- Reset Button HTML removed -->
     <div id="result"></div>
-    <div id="instructions">Скопируйте или запомните ваш выигрыш и сообщите его в телеграм боте. Бот обработает запрос и сообщит, какой приз вы получите!</div>
+    <div id="instructions">Если выпадет особый номер, появится окно с поздравлением! Скопируйте ваш выигрыш и сообщите его в телеграм боте.</div>
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Перейти к боту MixVine</a></div>
+
+    <!-- HTML Модального Окна -->
+    <div id="specialWinModal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <h2 id="specialWinTitle"></h2>
+            <p style="font-size: 1.2em;">🎉 Поздравляем с особым выигрышем! 🎉</p>
+        </div>
+    </div>
+
 
     <script>
         // --- КОНФИГУРАЦИЯ ---
         const config = {
-            // Замените этот массив на ваши предметы
+            // Предметы: #1-#17 (common) + 3 специальных
             items: [
-                { display: "Предмет 1", rarity: "common" },
-                { display: "Супер Приз!", rarity: "legendary" },
-                { display: "Предмет 3", rarity: "common" },
-                { display: "Что-то Синее", rarity: "rare", img: "https://via.placeholder.com/50/0000FF/FFFFFF?text=IMG" },
-                { display: "Предмет 5", rarity: "common" },
-                { display: "Немного Удачи", rarity: "uncommon" },
-                { display: "Предмет 7", rarity: "common" },
-                { display: "Фиолетовый Топ", rarity: "epic" },
-                { display: "Предмет 9", rarity: "common" },
-                { display: "Предмет 10", rarity: "common" },
-                { display: "Редкая Вещь", rarity: "rare" },
-                { display: "Предмет 12", rarity: "common" },
-                { display: "Еще Удача", rarity: "uncommon" },
-                { display: "Предмет 14", rarity: "common" },
-                { display: "Легендарка!", rarity: "legendary" },
-                 { display: "Предмет 16", rarity: "common" },
-                 { display: "Предмет 17", rarity: "uncommon" },
-                 { display: "Предмет 18", rarity: "common" },
-                 { display: "Предмет 19", rarity: "rare" },
-                 { display: "Эпик!", rarity: "epic" },
+                // Специальные предметы
+                { display: "Rare Number #1", rarity: "rare", special: true },
+                { display: "Epic Number #2", rarity: "epic", special: true },
+                { display: "Legendary Number #3", rarity: "legendary", special: true },
+                // Обычные предметы
+                { display: "#1", rarity: "common" }, { display: "#2", rarity: "common" },
+                { display: "#3", rarity: "common" }, { display: "#4", rarity: "common" },
+                { display: "#5", rarity: "common" }, { display: "#6", rarity: "common" },
+                { display: "#7", rarity: "common" }, { display: "#8", rarity: "common" },
+                { display: "#9", rarity: "common" }, { display: "#10", rarity: "common" },
+                { display: "#11", rarity: "common" }, { display: "#12", rarity: "common" },
+                { display: "#13", rarity: "common" }, { display: "#14", rarity: "common" },
+                { display: "#15", rarity: "common" }, { display: "#16", rarity: "common" },
+                { display: "#17", rarity: "common" },
+                 // Добавим еще немного обычных для лучшего распределения
+                 { display: "#18", rarity: "common" }, { display: "#19", rarity: "common" },
+                 { display: "#20", rarity: "common" },
+
             ],
             numberOfDuplicates: 5,
             spinDurationBase: 5,
             spinsMultiplier: 0.5,
             minSpins: 5,
             maxSpins: 8,
-            // showResetButton option removed
         };
         // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
+        // Перемешиваем массив предметов один раз при загрузке для большей случайности
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+        shuffleArray(config.items); // Перемешать основной массив
+
         const caseItemsContainer = document.getElementById('caseItems');
         const openCaseButton = document.getElementById('openCaseButton');
-        // resetButton variable removed
         const resultDisplay = document.getElementById('result');
+        const specialWinModal = document.getElementById('specialWinModal');
+        const modalContent = document.getElementById('modalContent');
+        const specialWinTitle = document.getElementById('specialWinTitle');
+        const closeModalButton = document.getElementById('closeModalButton');
+
         const numUniqueItems = config.items.length;
 
         let isSpinning = false;
         let itemWidth = 0;
         let itemsGenerated = false;
-        let hasOpenedOnce = false; // Added flag to prevent re-opening without reset button
+        let hasOpenedOnce = false;
 
         // Function to create item elements
         function createItems() {
             caseItemsContainer.innerHTML = '';
             const fragment = document.createDocumentFragment();
+            const itemsToRender = [];
 
-            const totalItemsToCreate = numUniqueItems * (1 + config.numberOfDuplicates);
-            for (let i = 0; i < totalItemsToCreate; i++) {
-                const itemIndex = i % numUniqueItems;
-                const itemData = config.items[itemIndex];
+            // Создаем полный набор (оригиналы + дубликаты)
+             for (let d = 0; d <= config.numberOfDuplicates; d++) {
+                itemsToRender.push(...config.items); // Добавляем копию основного массива
+            }
 
+
+            itemsToRender.forEach(itemData => {
                 let itemDiv = document.createElement('div');
                 itemDiv.classList.add('case-item');
                 if (itemData.rarity) {
                     itemDiv.classList.add(itemData.rarity);
                 }
 
-                if (itemData.img) {
-                    const img = document.createElement('img');
-                    img.src = itemData.img;
-                    img.alt = itemData.display;
-                    itemDiv.appendChild(img);
-                    const span = document.createElement('span');
-                    span.textContent = itemData.display;
-                    itemDiv.appendChild(span);
-                } else {
-                    // If no image, let text take more space potentially
-                    itemDiv.style.justifyContent = 'center'; // Center text vertically if no image
-                    itemDiv.textContent = itemData.display;
-                }
+                // Use text content directly for all items now
+                 itemDiv.textContent = itemData.display;
 
                 fragment.appendChild(itemDiv);
-            }
+            });
+
             caseItemsContainer.appendChild(fragment);
 
             if (caseItemsContainer.children.length > 0) {
@@ -276,52 +364,78 @@
             itemsGenerated = true;
         }
 
-        // resetCase function removed
+        // --- Показ модального окна ---
+        function showSpecialWin(item) {
+            specialWinTitle.textContent = item.display;
+            // Устанавливаем цвет рамки в зависимости от рарности
+            modalContent.classList.remove('rare-win', 'epic-win', 'legendary-win'); // Сначала убираем старые классы
+            modalContent.classList.add(item.rarity + '-win');
+
+            specialWinModal.style.display = "block"; // Показать модальное окно
+        }
+
+        // --- Закрытие модального окна ---
+        closeModalButton.onclick = function() {
+            specialWinModal.style.display = "none";
+        }
+        // Закрытие по клику вне окна
+        window.onclick = function(event) {
+            if (event.target == specialWinModal) {
+                specialWinModal.style.display = "none";
+            }
+        }
+
 
         // --- MAIN SPIN FUNCTION ---
         function openCase() {
-            // Prevent spinning if already spinning, not generated, width unknown, OR already opened once
             if (isSpinning || !itemsGenerated || itemWidth === 0 || hasOpenedOnce) {
-                 console.warn("Spin prevented: Conditions not met.", {isSpinning, itemsGenerated, itemWidth, hasOpenedOnce});
-                 if (itemWidth === 0 && itemsGenerated) {
-                    console.log("Retrying item width calculation...");
-                    itemWidth = caseItemsContainer.children[0].offsetWidth;
-                    if (itemWidth === 0) {
-                         console.error("Could not determine item width!");
-                         resultDisplay.textContent = "Ошибка: Не удалось рассчитать ширину элемента.";
-                         return;
-                    } else {
-                        console.log("Item width calculated on retry:", itemWidth);
-                        // Potentially try to spin again if width is now known
-                        // openCase(); // Be careful with recursion here
-                    }
-                 }
-                 return; // Stop execution
+                console.warn("Spin prevented: Conditions not met.", {isSpinning, itemsGenerated, itemWidth, hasOpenedOnce});
+                return;
             }
 
-            hasOpenedOnce = true; // Set the flag after successful start
+            hasOpenedOnce = true;
             isSpinning = true;
-            openCaseButton.disabled = true; // Disable button permanently now
+            openCaseButton.disabled = true;
             openCaseButton.textContent = "Крутится...";
-            resultDisplay.textContent = "";
-            // No need to hide reset button anymore
+            resultDisplay.textContent = ""; // Очистить предыдущий результат
 
             // --- Winning Logic ---
             const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
-            const winningItem = config.items[winningIndexInUniqueSet];
+            const winningItem = config.items[winningIndexInUniqueSet]; // Получаем предмет из *оригинального* перемешанного массива
             console.log(`Winning item: #${winningIndexInUniqueSet + 1}`, winningItem);
 
             // --- Animation Calculation ---
-            const targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
+            // Ищем первое вхождение этого ВЫИГРАВШЕГО предмета где-то в середине дубликатов
+            let targetItemIndex = -1;
+            const startIndexToSearch = Math.floor(config.numberOfDuplicates / 2) * numUniqueItems; // Начинаем поиск с середины дубликатов
+            const allRenderedItems = Array.from(caseItemsContainer.children);
+
+            for(let i = startIndexToSearch; i < allRenderedItems.length; i++) {
+                 // Сравниваем по display И rarity, чтобы найти точное совпадение
+                 const renderedItemText = allRenderedItems[i].textContent;
+                 const hasCorrectRarityClass = winningItem.rarity ? allRenderedItems[i].classList.contains(winningItem.rarity) : true;
+
+                if (renderedItemText === winningItem.display && hasCorrectRarityClass) {
+                    targetItemIndex = i;
+                    break;
+                }
+            }
+
+             if (targetItemIndex === -1) { // Fallback если не нашли (маловероятно)
+                 console.warn("Could not find exact winning item in duplicates, using original index logic.");
+                targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
+             }
+
+
             const containerWidth = caseItemsContainer.parentElement.offsetWidth;
             const centerOffset = (containerWidth / 2) - (itemWidth / 2);
             let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
-            const jitter = (Math.random() - 0.5) * (itemWidth * 0.4);
+            const jitter = (Math.random() - 0.5) * (itemWidth * 0.1); // Уменьшил джиттер для точности
             totalOffset += jitter;
 
             const numSpins = config.minSpins + Math.floor(Math.random() * (config.maxSpins - config.minSpins + 1));
             const duration = config.spinDurationBase + numSpins * config.spinsMultiplier;
-            console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s`);
+            console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s, Target Index: ${targetItemIndex}`);
 
              // --- Apply Animation ---
             caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`;
@@ -330,31 +444,40 @@
             // --- Handle Spin End ---
             setTimeout(() => {
                 isSpinning = false;
-                openCaseButton.textContent = "Кейс открыт!"; // Stays disabled
-                resultDisplay.innerHTML = `Вам выпало: <strong style="color: ${winningItem.rarity ? getRarityColor(winningItem.rarity) : '#f0c419'};">${winningItem.display}</strong>!`;
+                openCaseButton.textContent = "Кейс открыт!";
 
-                // No reset button logic needed here
+                // Показываем результат или модальное окно
+                if (winningItem.special) {
+                    // Показываем модальное окно для особого приза
+                    showSpecialWin(winningItem);
+                    // Можно также обновить основной текст результата
+                    resultDisplay.innerHTML = `Вы выиграли <strong style="color: ${getRarityColor(winningItem.rarity)};">${winningItem.display}</strong>!`;
+                } else {
+                    // Показываем обычный результат
+                    resultDisplay.innerHTML = `Вам выпало: <strong style="color: ${getRarityColor(winningItem.rarity)};">${winningItem.display}</strong>!`;
+                }
+
                 console.log("Spin finished.");
             }, duration * 1000);
         }
 
-        // Helper to get color based on rarity
+        // Helper to get color based on rarity (CSS color value)
         function getRarityColor(rarity) {
             switch (rarity) {
                 case 'common': return '#cccccc';
                 case 'uncommon': return '#aaffaa';
-                case 'rare': return '#aaaaff';
-                case 'epic': return '#ffaafe';
-                case 'legendary': return '#f0c419';
-                default: return '#e0e0e0';
+                case 'rare': return '#2980b9'; // Blue
+                case 'epic': return '#8e44ad'; // Purple
+                case 'legendary': return '#e67e22'; // Gold/Orange part of gradient
+                default: return '#333'; // Default dark text color
             }
         }
 
         // --- Initialize ---
-        createItems();
+        createItems(); // Create items when script loads
 
          window.addEventListener('resize', () => {
-             if (caseItemsContainer.children.length > 0 && !isSpinning) { // Avoid recalc during spin
+             if (caseItemsContainer.children.length > 0 && !isSpinning) {
                  itemWidth = caseItemsContainer.children[0].offsetWidth;
                  console.log("Item width recalculated on resize:", itemWidth);
              }
