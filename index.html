@@ -238,6 +238,33 @@
              /* .case-item.rare, .case-item.epic, .case-item.legendary { font-size: 13px; } */
         }
 
+        /* --- Стили для соглашения --- */
+        .agreement-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: center; /* Центрирование по горизонтали */
+        }
+
+        #agreementCheckbox {
+            margin-right: 5px;
+        }
+
+        #agreementLabel {
+            font-size: 14px;
+            color: #ddd;
+            user-select: none; /* Предотвращает выделение текста */
+        }
+
+        #agreementLabel a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #agreementLabel a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -254,7 +281,13 @@
         </div>
     </div>
 
-    <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
+    <!-- Контейнер для соглашения -->
+    <div class="agreement-container">
+        <input type="checkbox" id="agreementCheckbox">
+        <label for="agreementCheckbox" id="agreementLabel">Я согласен с <a href="https://mixvineproject.github.io/politika" target="_blank">Политикой конфиденциальности</a> и <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательским соглашением</a></label>
+    </div>
+
+    <button id="openCaseButton" onclick="openCase()" disabled>Открыть кейс</button>
     <div id="result"></div>
     <div id="instructions">Нажмите "Открыть кейс", чтобы испытать удачу!</div>
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Связаться с ботом MixVine</a></div>
@@ -316,6 +349,7 @@
         const winModalContent = document.getElementById('winModalContent');
         const winItemTitle = document.getElementById('winItemTitle');
         const winModalCloseButton = document.getElementById('winModalCloseButton');
+        const agreementCheckbox = document.getElementById('agreementCheckbox');
 
         const numUniqueItems = config.items.length;
 
@@ -495,6 +529,11 @@
                  }
              }, 250);
          });
+
+        // Обработчик изменения состояния чекбокса
+        agreementCheckbox.addEventListener('change', function() {
+            openCaseButton.disabled = !this.checked;
+        });
 
     </script>
 
