@@ -3,101 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Free Case - Customizable</title>
+    <title>MixVine Free Case - Final</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center vertically too */
+            justify-content: center;
             min-height: 100vh;
-            background-color: #1a1a1d; /* Darker background */
-            /* Using a gradient instead of image for faster loading/simpler customization */
+            background-color: #1a1a1d;
             background-image: linear-gradient(135deg, #1a1a1d 0%, #333338 100%);
             background-size: cover;
             overflow-x: hidden;
-            color: #e0e0e0; /* Lighter text color for better contrast */
+            color: #e0e0e0;
             padding: 20px;
             box-sizing: border-box;
         }
 
         h1 {
             text-align: center;
-            color: #f0c419; /* Gold-like color */
-            margin-bottom: 30px; /* Increased spacing */
+            color: #f0c419;
+            margin-bottom: 30px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        .case-wrapper { /* Added wrapper for centering marker */
+        .case-wrapper {
             position: relative;
             width: 100%;
-            max-width: 80vw; /* Limit max width on large screens */
+            max-width: 80vw;
             margin-bottom: 30px;
         }
 
-        /* Added a marker to show the winning position */
         .case-marker {
             position: absolute;
-            top: -5px; /* Position slightly above */
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-top: 15px solid #f0c419; /* Gold marker */
+            border-top: 15px solid #f0c419;
             z-index: 10;
         }
-         .case-marker-line { /* Optional line marker */
+         .case-marker-line {
              position: absolute;
              top: 0;
              left: 50%;
              transform: translateX(-50%);
              width: 3px;
-             height: 100%;
-             background-color: rgba(240, 196, 25, 0.7); /* Semi-transparent gold */
+             height: 100%; /* Takes full height of parent */
+             background-color: rgba(240, 196, 25, 0.7);
              z-index: 5;
              box-shadow: 0 0 5px rgba(240, 196, 25, 0.5);
         }
 
-
         .case-container {
-            width: 100%; /* Take width from wrapper */
-            height: 150px; /* Adjusted height */
+            width: 100%;
+            height: 150px; /* <--- Высота контейнера кейса */
             overflow: hidden;
             white-space: nowrap;
             background-color: rgba(0, 0, 0, 0.6);
-            border: 2px solid #444; /* Added border */
-            border-radius: 5px; /* Rounded corners */
-            position: relative; /* Needed for marker line */
+            border: 2px solid #444;
+            border-radius: 5px;
+            position: relative;
         }
 
         .case-items {
             display: inline-block;
-            /* Default transition, JS will override duration */
-            transition: transform 5s cubic-bezier(0.1, 0.6, 0.1, 1); /* Slower, smoother easing */
-            /* Add some initial padding to center the first item better visually at start */
-            /* padding-left: calc(50% - 50px);  Adjust 50px based on half item width if needed */
+            height: 100%; /* Make sure items container also takes full height */
+            transition: transform 5s cubic-bezier(0.1, 0.6, 0.1, 1);
         }
 
         .case-item {
-            display: inline-flex; /* Use flex for better content centering */
-            align-items: center;
-            justify-content: center;
-            width: 120px; /* Wider items */
-            height: 100%;
-            background-color: #28282d; /* Slightly lighter item background */
+            display: inline-flex; /* Use flex for content centering */
+            align-items: center; /* Vertically center content */
+            justify-content: center; /* Horizontally center content */
+            width: 120px;
+            height: 100%; /* <--- Ячейка занимает 100% высоты контейнера */
+            background-color: #28282d;
             border-right: 1px solid #444;
             text-align: center;
-            font-size: 18px; /* Adjusted font size */
+            font-size: 18px;
             font-weight: bold;
             color: #e0e0e0;
-            box-sizing: border-box; /* Include padding/border in width */
-            padding: 5px;
-            vertical-align: top; /* Align items nicely */
+            box-sizing: border-box;
+            padding: 0 5px; /* Remove vertical padding, keep horizontal */
+            vertical-align: top; /* Align boxes themselves at the top */
+            flex-direction: column; /* Stack image and text vertically */
         }
-        /* Example: Different colors for items (can be set via JS) */
+        /* Rarity colors */
         .case-item.common { background-color: #3a3a40; color: #ccc; }
         .case-item.uncommon { background-color: #4a5a40; color: #aaffaa; }
         .case-item.rare { background-color: #404a7a; color: #aaaaff; }
@@ -106,82 +102,68 @@
 
         /* Style for images inside items */
         .case-item img {
-            max-width: 80%;
-            max-height: 60%;
+            max-width: 90%; /* Allow slightly larger image */
+            max-height: 65%; /* Adjust max height as needed */
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Space between image and text */
+            object-fit: contain; /* Ensure image scales nicely */
         }
-        .case-item span { /* If you have text below image */
+        .case-item span {
              display: block;
              font-size: 14px;
-             margin-top: auto; /* Push text to bottom if using flex */
+             margin-top: auto; /* Push text towards bottom */
+             line-height: 1.2; /* Adjust line height for text */
+             padding-bottom: 5px; /* Add some padding at the bottom */
         }
 
-
         button#openCaseButton {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
             color: white;
-            padding: 12px 25px; /* Bigger padding */
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
             margin-bottom: 15px;
-            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+            transition: background-color 0.3s ease, transform 0.1s ease;
         }
         button#openCaseButton:hover:not(:disabled) {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #45a049;
         }
         button#openCaseButton:active:not(:disabled) {
-            transform: scale(0.98); /* Click effect */
+            transform: scale(0.98);
         }
-
-        button#openCaseButton:disabled { /* More specific selector */
-            background-color: #666; /* Darker gray for disabled */
+        button#openCaseButton:disabled {
+            background-color: #666;
             color: #bbb;
-            cursor: not-allowed; /* Standard disabled cursor */
-            /* pointer-events: none; is automatically handled by :disabled */
+            cursor: not-allowed;
         }
 
         #result {
-            font-size: 26px; /* Larger result text */
+            font-size: 26px;
             font-weight: bold;
-            color: #f0c419; /* Gold result text */
+            color: #f0c419;
             margin-bottom: 15px;
-            min-height: 30px; /* Reserve space */
+            min-height: 30px;
             text-align: center;
         }
 
         #instructions, #bot-link {
-            font-size: 16px; /* Slightly smaller instructions */
+            font-size: 16px;
             color: #ccc;
             text-align: center;
-            max-width: 600px; /* Limit width for readability */
+            max-width: 600px;
             line-height: 1.5;
         }
         #bot-link a {
-            color: #6bbdff; /* Lighter blue link */
+            color: #6bbdff;
             text-decoration: none;
         }
          #bot-link a:hover {
              text-decoration: underline;
          }
 
-         /* Button for Resetting (Optional) */
-         #resetButton {
-            background-color: #f44336; /* Red */
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px; /* Space above reset */
-            display: none; /* Hidden initially */
-         }
-          #resetButton:hover {
-              background-color: #da190b;
-          }
+        /* Reset button CSS removed */
 
     </style>
 </head>
@@ -190,9 +172,9 @@
     <h1>Крути кейс от MixVine Project!</h1>
 
     <div class="case-wrapper">
-        <div class="case-marker"></div> <!-- The triangle marker -->
+        <div class="case-marker"></div>
         <div class="case-container">
-             <div class="case-marker-line"></div> <!-- The line marker -->
+             <div class="case-marker-line"></div>
             <div class="case-items" id="caseItems">
                 <!-- Items will be added dynamically here -->
             </div>
@@ -200,7 +182,7 @@
     </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
-    <button id="resetButton" onclick="resetCase()">Крутить ещё раз (Тест)</button> <!-- Optional Reset Button -->
+    <!-- Reset Button HTML removed -->
     <div id="result"></div>
     <div id="instructions">Скопируйте или запомните ваш выигрыш и сообщите его в телеграм боте. Бот обработает запрос и сообщит, какой приз вы получите!</div>
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Перейти к боту MixVine</a></div>
@@ -209,13 +191,11 @@
         // --- КОНФИГУРАЦИЯ ---
         const config = {
             // Замените этот массив на ваши предметы
-            // Каждый предмет - это объект со свойством 'display' (что показывать)
-            // Можно добавить другие свойства, например 'rarity' для цвета или 'img' для картинки
             items: [
                 { display: "Предмет 1", rarity: "common" },
                 { display: "Супер Приз!", rarity: "legendary" },
                 { display: "Предмет 3", rarity: "common" },
-                { display: "Что-то Синее", rarity: "rare", img: "https://via.placeholder.com/50/0000FF/FFFFFF?text=IMG" }, // Пример с картинкой
+                { display: "Что-то Синее", rarity: "rare", img: "https://via.placeholder.com/50/0000FF/FFFFFF?text=IMG" },
                 { display: "Предмет 5", rarity: "common" },
                 { display: "Немного Удачи", rarity: "uncommon" },
                 { display: "Предмет 7", rarity: "common" },
@@ -233,105 +213,76 @@
                  { display: "Предмет 19", rarity: "rare" },
                  { display: "Эпик!", rarity: "epic" },
             ],
-            numberOfDuplicates: 5, // Сколько раз дублировать набор предметов для плавной прокрутки
-            spinDurationBase: 5, // Базовая длительность анимации в секундах
-            spinsMultiplier: 0.5, // Дополнительные секунды за каждый "полный оборот"
-            minSpins: 5, // Минимальное количество "полных оборотов"
-            maxSpins: 8, // Максимальное количество "полных оборотов"
-            showResetButton: true // Показывать ли кнопку сброса (для теста или если разрешено >1 спина)
+            numberOfDuplicates: 5,
+            spinDurationBase: 5,
+            spinsMultiplier: 0.5,
+            minSpins: 5,
+            maxSpins: 8,
+            // showResetButton option removed
         };
         // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
         const caseItemsContainer = document.getElementById('caseItems');
         const openCaseButton = document.getElementById('openCaseButton');
-        const resetButton = document.getElementById('resetButton'); // Get reset button
+        // resetButton variable removed
         const resultDisplay = document.getElementById('result');
-        const numUniqueItems = config.items.length; // Get number of items from config
+        const numUniqueItems = config.items.length;
 
-        let isSpinning = false; // Флаг, идет ли анимация
-        let itemWidth = 0; // Ширина одного элемента (рассчитается позже)
-        let itemsGenerated = false; // Флаг, сгенерированы ли итемы
+        let isSpinning = false;
+        let itemWidth = 0;
+        let itemsGenerated = false;
+        let hasOpenedOnce = false; // Added flag to prevent re-opening without reset button
 
         // Function to create item elements
         function createItems() {
-            caseItemsContainer.innerHTML = ''; // Clear previous items if any
-            const fragment = document.createDocumentFragment(); // Use fragment for performance
+            caseItemsContainer.innerHTML = '';
+            const fragment = document.createDocumentFragment();
 
-            // Create original set + duplicates
             const totalItemsToCreate = numUniqueItems * (1 + config.numberOfDuplicates);
             for (let i = 0; i < totalItemsToCreate; i++) {
-                const itemIndex = i % numUniqueItems; // Get index within the original set
+                const itemIndex = i % numUniqueItems;
                 const itemData = config.items[itemIndex];
 
                 let itemDiv = document.createElement('div');
                 itemDiv.classList.add('case-item');
                 if (itemData.rarity) {
-                    itemDiv.classList.add(itemData.rarity); // Add rarity class for styling
+                    itemDiv.classList.add(itemData.rarity);
                 }
 
-                // Add content (image or text)
                 if (itemData.img) {
                     const img = document.createElement('img');
                     img.src = itemData.img;
-                    img.alt = itemData.display; // Alt text for accessibility
+                    img.alt = itemData.display;
                     itemDiv.appendChild(img);
                     const span = document.createElement('span');
                     span.textContent = itemData.display;
                     itemDiv.appendChild(span);
                 } else {
-                    itemDiv.textContent = itemData.display; // Just display text
+                    // If no image, let text take more space potentially
+                    itemDiv.style.justifyContent = 'center'; // Center text vertically if no image
+                    itemDiv.textContent = itemData.display;
                 }
 
                 fragment.appendChild(itemDiv);
             }
             caseItemsContainer.appendChild(fragment);
 
-             // Calculate item width AFTER items are added to the DOM
             if (caseItemsContainer.children.length > 0) {
-                // Force reflow/layout calculation
-                 caseItemsContainer.offsetHeight;
+                 caseItemsContainer.offsetHeight; // Force reflow
                 itemWidth = caseItemsContainer.children[0].offsetWidth;
                  console.log("Item width calculated:", itemWidth);
-
-                 // Calculate initial offset to center the target item
-                 const containerWidth = caseItemsContainer.parentElement.offsetWidth;
-                 const initialOffset = (containerWidth / 2) - (itemWidth / 2);
-                 console.log("Initial Offset:", initialOffset);
-                 // Apply initial padding/margin or transform if needed for centering
-                 // This example uses CSS transform on the container for the spin,
-                 // so centering the "target" under the marker is done by calculating spin offset correctly.
-                 // Initial visual centering can be tricky; using the marker is often easier.
             }
 
             itemsGenerated = true;
         }
 
-        // Function to reset the case state (optional)
-        function resetCase() {
-            isSpinning = false;
-            openCaseButton.disabled = false;
-            openCaseButton.textContent = "Открыть кейс";
-            resultDisplay.textContent = "";
-            resetButton.style.display = 'none'; // Hide reset button again
-
-            // Reset scroll position instantly
-            caseItemsContainer.style.transition = 'none'; // Disable transition for instant reset
-            caseItemsContainer.style.transform = `translateX(0px)`; // Or calculate initial centered position
-
-            // Force reflow before re-enabling transitions
-            caseItemsContainer.offsetHeight;
-
-            // Restore default transition (optional, if needed, or let openCase set it)
-            // caseItemsContainer.style.transition = `transform ${config.spinDurationBase}s cubic-bezier(0.1, 0.6, 0.1, 1)`;
-
-            console.log("Case reset.");
-        }
-
+        // resetCase function removed
 
         // --- MAIN SPIN FUNCTION ---
         function openCase() {
-            if (isSpinning || !itemsGenerated || itemWidth === 0) {
-                 console.warn("Spin prevented: Already spinning, items not ready, or item width unknown.");
+            // Prevent spinning if already spinning, not generated, width unknown, OR already opened once
+            if (isSpinning || !itemsGenerated || itemWidth === 0 || hasOpenedOnce) {
+                 console.warn("Spin prevented: Conditions not met.", {isSpinning, itemsGenerated, itemWidth, hasOpenedOnce});
                  if (itemWidth === 0 && itemsGenerated) {
                     console.log("Retrying item width calculation...");
                     itemWidth = caseItemsContainer.children[0].offsetWidth;
@@ -341,21 +292,19 @@
                          return;
                     } else {
                         console.log("Item width calculated on retry:", itemWidth);
+                        // Potentially try to spin again if width is now known
+                        // openCase(); // Be careful with recursion here
                     }
-                 } else {
-                     return;
                  }
-
+                 return; // Stop execution
             }
 
-
+            hasOpenedOnce = true; // Set the flag after successful start
             isSpinning = true;
-            openCaseButton.disabled = true;
+            openCaseButton.disabled = true; // Disable button permanently now
             openCaseButton.textContent = "Крутится...";
-            resultDisplay.textContent = ""; // Clear previous result
-             if (resetButton.style.display !== 'none') {
-                resetButton.style.display = 'none'; // Hide reset button during spin
-             }
+            resultDisplay.textContent = "";
+            // No need to hide reset button anymore
 
             // --- Winning Logic ---
             const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
@@ -363,48 +312,33 @@
             console.log(`Winning item: #${winningIndexInUniqueSet + 1}`, winningItem);
 
             // --- Animation Calculation ---
-            // Calculate target position: aim for an item far into the duplicates for smooth stop
-            const targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet; // Target an item in the second to last set of duplicates
-
-            // Calculate base offset to center the *target* item under the marker
-             const containerWidth = caseItemsContainer.parentElement.offsetWidth; // Get container width dynamically
-             const centerOffset = (containerWidth / 2) - (itemWidth / 2);
-
-            // Calculate the total distance to scroll to reach the target item
+            const targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
+            const containerWidth = caseItemsContainer.parentElement.offsetWidth;
+            const centerOffset = (containerWidth / 2) - (itemWidth / 2);
             let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
+            const jitter = (Math.random() - 0.5) * (itemWidth * 0.4);
+            totalOffset += jitter;
 
-             // Add random variation/jitter to the final position (optional)
-             const jitter = (Math.random() - 0.5) * (itemWidth * 0.4); // Random +/- 20% of item width
-             totalOffset += jitter;
-
-
-            // Calculate dynamic duration
             const numSpins = config.minSpins + Math.floor(Math.random() * (config.maxSpins - config.minSpins + 1));
             const duration = config.spinDurationBase + numSpins * config.spinsMultiplier;
             console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s`);
 
-
              // --- Apply Animation ---
-            caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`; // Smoother easing for stop
+            caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`;
             caseItemsContainer.style.transform = `translateX(-${totalOffset}px)`;
-
 
             // --- Handle Spin End ---
             setTimeout(() => {
                 isSpinning = false;
-                openCaseButton.textContent = "Кейс открыт!"; // Keep disabled until reset or page reload
+                openCaseButton.textContent = "Кейс открыт!"; // Stays disabled
                 resultDisplay.innerHTML = `Вам выпало: <strong style="color: ${winningItem.rarity ? getRarityColor(winningItem.rarity) : '#f0c419'};">${winningItem.display}</strong>!`;
 
-                 // Show reset button if configured
-                if (config.showResetButton) {
-                    resetButton.style.display = 'inline-block';
-                }
-
+                // No reset button logic needed here
                 console.log("Spin finished.");
-            }, duration * 1000); // Timeout matches animation duration
+            }, duration * 1000);
         }
 
-        // Helper to get color based on rarity (customize colors here)
+        // Helper to get color based on rarity
         function getRarityColor(rarity) {
             switch (rarity) {
                 case 'common': return '#cccccc';
@@ -417,11 +351,10 @@
         }
 
         // --- Initialize ---
-        createItems(); // Create items when script loads
+        createItems();
 
-         // Optional: Add a listener in case layout changes affect item width
          window.addEventListener('resize', () => {
-             if (caseItemsContainer.children.length > 0) {
+             if (caseItemsContainer.children.length > 0 && !isSpinning) { // Avoid recalc during spin
                  itemWidth = caseItemsContainer.children[0].offsetWidth;
                  console.log("Item width recalculated on resize:", itemWidth);
              }
