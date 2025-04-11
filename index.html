@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MixVine Free Case</title> <!-- ИЗМЕНЕНО -->
+    <title>MixVine Free Case</title>
     <style>
-        /* Анимация для фона */
-        @keyframes darkGoldGradientShift {
+        /* Анимация для фона (Фиолетовый <-> Темно-желтый) */
+        @keyframes purpleGoldGradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -18,9 +18,9 @@
             to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
-        /* Анимация для спецэффекта (например, пульсация тени) */
+        /* Анимация для спецэффекта */
         @keyframes specialGlow {
-            0% { box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.5); } /* Gold glow */
+            0% { box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.5); }
             50% { box-shadow: 0 0 30px 10px rgba(255, 223, 0, 0.8); }
             100% { box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.5); }
         }
@@ -31,65 +31,54 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Центрируем основной контент */
+            justify-content: center;
             min-height: 100vh;
-            /* Темно-золотой анимированный фон */
-            background: linear-gradient(-45deg, #b48a00, #c89600, #a98600, #8b6914); /* Dark gold tones */
+            /* Фиолетово-Темно-желтый анимированный фон */
+            background: linear-gradient(-45deg, #8e44ad, #b48a00, #6a1b9a, #c89600); /* Purple / Dark gold tones */
             background-size: 400% 400%;
-            animation: darkGoldGradientShift 15s ease infinite;
+            animation: purpleGoldGradientShift 15s ease infinite;
             overflow-x: hidden;
-            color: #f0f0f0; /* Светлый текст для темного фона */
-            padding: 20px;
+            color: #f0f0f0;
+            padding: 20px; /* Default padding */
             box-sizing: border-box;
-            position: relative; /* Для позиционирования футера */
-            padding-bottom: 60px; /* Оставляем место для футера */
+            position: relative;
+            padding-bottom: 60px;
         }
 
         h1 {
             text-align: center;
-            color: #fff; /* Белый заголовок */
-            margin-bottom: 30px;
+            color: #fff;
+            margin-bottom: 25px; /* Slightly less margin */
+            font-size: 2em; /* Default size */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
         .case-wrapper {
             position: relative;
             width: 100%;
-            max-width: 80vw;
-            margin-bottom: 30px;
+            max-width: 80vw; /* Default max width */
+            margin-bottom: 25px;
         }
 
+        /* Маркеры остаются без изменений */
         .case-marker {
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 15px solid #fff; /* White marker */
-            z-index: 10;
+            position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 10px solid transparent;
+            border-right: 10px solid transparent; border-top: 15px solid #fff; z-index: 10;
         }
          .case-marker-line {
-             position: absolute;
-             top: 0;
-             left: 50%;
-             transform: translateX(-50%);
-             width: 3px;
-             height: 100%;
-             background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-             z-index: 5;
-             box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 3px; height: 100%; background-color: rgba(255, 255, 255, 0.5);
+            z-index: 5; box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         .case-container {
             width: 100%;
-            height: 150px;
+            height: 140px; /* Slightly smaller default height */
             overflow: hidden;
             white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0.5); /* Darker overlay */
-            border: 2px solid #777; /* Grey border */
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #777;
             border-radius: 5px;
             position: relative;
         }
@@ -101,193 +90,194 @@
         }
 
         .case-item {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 140px; /* Slightly smaller default width */
             height: 100%;
             border-right: 1px solid #555;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            box-sizing: border-box;
-            padding: 0 5px;
-            vertical-align: top;
-            flex-direction: column;
-            color: #e0e0e0;
-            background-color: #333; /* Darker item background */
+            text-align: center; font-size: 20px; /* Adjusted size */
+            font-weight: bold; box-sizing: border-box; padding: 0 5px;
+            vertical-align: top; flex-direction: column; color: #e0e0e0;
+            background-color: #333;
         }
         /* Rarity colors */
         .case-item.common { background-color: #444; color: #ccc; }
-        .case-item.rare { background-color: #2980b9; color: #fff; } /* BLUE */
-        .case-item.epic { background-color: #8e44ad; color: #fff; } /* PURPLE */
+        .case-item.rare { background-color: #2980b9; color: #fff; }
+        .case-item.epic { background-color: #8e44ad; color: #fff; }
         .case-item.legendary {
             background-image: linear-gradient(45deg, #f1c40f, #f39c12, #e67e22);
-            color: #333;
-            font-weight: bold;
+            color: #333; font-weight: bold;
         }
 
         button#openCaseButton {
-            background-color: #c89600; /* Gold button */
-            color: #333; /* Dark text on gold */
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            background-color: #c89600; color: #333;
+            padding: 10px 20px; /* Slightly smaller padding */
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 16px; /* Adjusted size */
+            font-weight: bold; margin-bottom: 15px;
             transition: background-color 0.3s ease, transform 0.1s ease;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
         }
-        button#openCaseButton:hover:not(:disabled) {
-            background-color: #b48a00;
-        }
-        button#openCaseButton:active:not(:disabled) {
-            transform: scale(0.98);
-        }
+        button#openCaseButton:hover:not(:disabled) { background-color: #b48a00; }
+        button#openCaseButton:active:not(:disabled) { transform: scale(0.98); }
         button#openCaseButton:disabled {
-            background-color: #666;
-            color: #bbb;
-            cursor: not-allowed;
-            text-shadow: none;
+            background-color: #666; color: #bbb;
+            cursor: not-allowed; text-shadow: none;
         }
 
-        /* Скрываем стандартный текстовый результат, так как будет модальное окно */
-        #result {
-           display: none;
-        }
+        #result { display: none; }
 
         #instructions, #bot-link {
-            font-size: 16px;
-            color: #ddd; /* Lighter grey text */
-            text-align: center;
-            max-width: 600px;
-            line-height: 1.5;
+            font-size: 15px; /* Slightly smaller text */
+            color: #ddd; text-align: center;
+            max-width: 90%; /* Allow wider text on mobile */
+            line-height: 1.4;
         }
-         #bot-link {
-            margin-top: 5px; /* Add space above link if needed */
-         }
-        #bot-link a {
-            color: #f1c40f; /* Gold link */
-            text-decoration: none;
-            font-weight: bold;
-        }
-         #bot-link a:hover {
-             text-decoration: underline;
-         }
+         #bot-link { margin-top: 5px; }
+        #bot-link a { color: #f1c40f; text-decoration: none; font-weight: bold; }
+         #bot-link a:hover { text-decoration: underline; }
 
-        /* --- МОДАЛЬНОЕ ОКНО (Общее для всех) --- */
+        /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7); /* Darker overlay */
+            display: none; position: fixed; z-index: 100;
+            left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.7);
         }
 
         .modal-content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #e8e8e8; /* Light gray background */
-            color: #333; /* Dark text for modal */
-            padding: 25px 35px;
-            border: 3px solid #888; /* Default border */
-            border-radius: 10px;
-            width: 90%; /* Responsive width */
-            max-width: 450px; /* Max width */
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            background-color: #e8e8e8; color: #333;
+            padding: 20px 25px; /* Reduced padding */
+            border: 3px solid #888; border-radius: 10px;
+            width: 90%; /* Default responsive width */
+            max-width: 450px; /* Default max width */
+            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             animation: modalFadeIn 0.4s ease-out forwards;
         }
-
-        /* Класс для спецэффекта */
         .modal-content.special-effect {
-             animation: modalFadeIn 0.4s ease-out forwards, specialGlow 1.5s ease-in-out infinite alternate; /* Add glow animation */
-             border-width: 5px; /* Make border thicker */
+             animation: modalFadeIn 0.4s ease-out forwards, specialGlow 1.5s ease-in-out infinite alternate;
+             border-width: 5px;
         }
-
-
-        /* Стилизация рамки по рарности */
+        /* Modal rarity borders */
          .modal-content.common-win { border-color: #777; }
-         .modal-content.uncommon-win { border-color: #4a5a40; } /* Just in case */
          .modal-content.rare-win { border-color: #2980b9; }
          .modal-content.epic-win { border-color: #8e44ad; }
          .modal-content.legendary-win { border-color: #f39c12; }
 
-
-        .modal-content h2 { /* Заголовок с выпавшим предметом */
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 2.2em;
+        .modal-content h2 {
+            margin-top: 0; margin-bottom: 15px;
+            font-size: 1.8em; /* Reduced size */
             font-weight: bold;
-            /* Цвет будет установлен JS */
         }
-
-        .modal-instruction { /* Текст про скриншот */
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            color: #555;
+        .modal-instruction {
+            font-size: 1em; /* Reduced size */
+            margin-bottom: 20px; color: #555;
         }
-
-        .modal-bot-button { /* Кнопка-ссылка на бота */
-            display: inline-block;
-            background-color: #5865F2; /* Discord-like purple/blue */
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
+        .modal-bot-button {
+            display: inline-block; background-color: #5865F2; color: #fff;
+            padding: 10px 20px; /* Reduced padding */
+            border-radius: 5px; text-decoration: none;
+            font-weight: bold; font-size: 1em; /* Reduced size */
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
-        .modal-bot-button:hover {
-            background-color: #4752C4;
-            transform: scale(1.02);
-        }
-         .modal-bot-button:active {
-             transform: scale(0.98);
-         }
-
+        .modal-bot-button:hover { background-color: #4752C4; transform: scale(1.02); }
+         .modal-bot-button:active { transform: scale(0.98); }
 
         .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            font-size: 26px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
+            color: #aaa; position: absolute; top: 5px; right: 10px; /* Closer */
+            font-size: 24px; /* Slightly smaller */
+            font-weight: bold; cursor: pointer; line-height: 1;
         }
-        .close-button:hover,
-        .close-button:focus {
-            color: #333;
-        }
+        .close-button:hover, .close-button:focus { color: #333; }
 
         /* --- Футер --- */
         footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            padding: 15px 0;
-            color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
-            font-size: 14px;
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            text-align: center; padding: 10px 0; /* Less padding */
+            color: rgba(255, 255, 255, 0.6); font-size: 13px; /* Smaller */
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+
+        /* Планшеты и телефоны (ландшафт) */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px; /* Less padding */
+                padding-bottom: 50px; /* Keep space for footer */
+            }
+             h1 {
+                 font-size: 1.8em; /* Smaller title */
+                 margin-bottom: 20px;
+             }
+            .case-wrapper {
+                max-width: 90vw; /* Slightly wider */
+                margin-bottom: 20px;
+            }
+            .case-container {
+                 height: 120px; /* Smaller height */
+            }
+             .case-item {
+                 width: 120px; /* Slightly smaller width */
+                 font-size: 18px;
+             }
+              button#openCaseButton {
+                  font-size: 15px;
+                  padding: 10px 18px;
+              }
+            .modal-content {
+                max-width: 400px;
+                padding: 15px 20px;
+            }
+            .modal-content h2 { font-size: 1.6em; }
+            .modal-instruction { font-size: 0.95em; margin-bottom: 15px; }
+            .modal-bot-button { font-size: 0.95em; padding: 9px 18px; }
+            footer { font-size: 12px; padding: 8px 0;}
+        }
+
+        /* Телефоны (портрет) */
+        @media (max-width: 480px) {
+             body {
+                padding: 10px; /* Even less padding */
+                padding-bottom: 45px;
+            }
+             h1 {
+                 font-size: 1.5em; /* Smaller title */
+                 margin-bottom: 15px;
+             }
+             .case-wrapper {
+                 max-width: 95vw; /* Almost full width */
+                 margin-bottom: 15px;
+             }
+             .case-container {
+                 height: 110px; /* Smaller height */
+            }
+             .case-item {
+                 width: 100px; /* Smaller items */
+                 font-size: 15px;
+             }
+             button#openCaseButton {
+                 font-size: 14px;
+                 padding: 8px 15px;
+             }
+              #instructions, #bot-link {
+                 font-size: 14px;
+             }
+             .modal-content {
+                 width: 92%;
+                 max-width: 300px; /* Limit max width */
+                 padding: 15px;
+             }
+             .modal-content h2 { font-size: 1.4em; margin-bottom: 10px;}
+             .modal-instruction { font-size: 0.9em; margin-bottom: 15px;}
+             .modal-bot-button { font-size: 0.9em; padding: 8px 15px; }
+             footer { font-size: 11px; padding: 6px 0;}
         }
 
     </style>
 </head>
 <body>
 
-    <h1>Крути бесплатный кейс от MixVine Pr.</h1> <!-- ИЗМЕНЕНО -->
+    <h1>Крути бесплатный кейс от MixVine Pr.</h1>
 
     <div class="case-wrapper">
         <div class="case-marker"></div>
@@ -300,15 +290,15 @@
     </div>
 
     <button id="openCaseButton" onclick="openCase()">Открыть кейс</button>
-    <div id="result"></div> <!-- Этот блок теперь скрыт через CSS -->
-    <div id="instructions">Нажмите "Открыть кейс", чтобы испытать удачу!</div> <!-- Обновил текст инструкции -->
+    <div id="result"></div>
+    <div id="instructions">Нажмите "Открыть кейс", чтобы испытать удачу!</div>
     <div id="bot-link"><a href="https://t.me/mixvinebot" target="_blank">Связаться с ботом MixVine</a></div>
 
     <!-- HTML Модального Окна (единое) -->
     <div id="winModal" class="modal">
         <div class="modal-content" id="winModalContent">
             <span class="close-button" id="winModalCloseButton">&times;</span>
-            <h2 id="winItemTitle"></h2> <!-- Заголовок для названия предмета -->
+            <h2 id="winItemTitle"></h2>
             <p class="modal-instruction">Заскринь экран и скинь его телеграм боту</p>
             <a href="https://t.me/mixvinebot" target="_blank" class="modal-bot-button">Перейти к боту</a>
         </div>
@@ -323,11 +313,9 @@
         // --- КОНФИГУРАЦИЯ ---
         const config = {
             items: [
-                // Специальные предметы
                 { display: "Rare Number #1", rarity: "rare", special: true },
                 { display: "Epic Number #2", rarity: "epic", special: true },
                 { display: "Legendary Number #3", rarity: "legendary", special: true },
-                // Обычные предметы
                 { display: "#1", rarity: "common" }, { display: "#2", rarity: "common" },
                 { display: "#3", rarity: "common" }, { display: "#4", rarity: "common" },
                 { display: "#5", rarity: "common" }, { display: "#6", rarity: "common" },
@@ -358,7 +346,6 @@
 
         const caseItemsContainer = document.getElementById('caseItems');
         const openCaseButton = document.getElementById('openCaseButton');
-        // const resultDisplay = document.getElementById('result'); // Не используем напрямую
         const winModal = document.getElementById('winModal');
         const winModalContent = document.getElementById('winModalContent');
         const winItemTitle = document.getElementById('winItemTitle');
@@ -367,12 +354,13 @@
         const numUniqueItems = config.items.length;
 
         let isSpinning = false;
-        let itemWidth = 0;
+        let itemWidth = 0; // Will be calculated
         let itemsGenerated = false;
         let hasOpenedOnce = false;
 
-        function createItems() {
-            caseItemsContainer.innerHTML = '';
+        // Function to create item elements and calculate width
+        function setupItems() {
+            caseItemsContainer.innerHTML = ''; // Clear first
             const fragment = document.createDocumentFragment();
             const itemsToRender = [];
 
@@ -380,9 +368,30 @@
                 itemsToRender.push(...config.items);
             }
 
+            // Determine item width from CSS for the current screen size
+            // Create a temporary item to measure, then remove it
+            let tempItemDiv = document.createElement('div');
+            tempItemDiv.classList.add('case-item');
+            tempItemDiv.style.visibility = 'hidden'; // Don't show it
+            caseItemsContainer.appendChild(tempItemDiv);
+            itemWidth = tempItemDiv.offsetWidth; // Get calculated width
+            caseItemsContainer.removeChild(tempItemDiv); // Clean up
+
+            console.log("Item width calculated:", itemWidth);
+
+            if (itemWidth === 0) {
+                console.error("Could not determine item width! Using default.");
+                itemWidth = 100; // Fallback width if calculation fails
+            }
+
+
+            // Now create the actual items
             itemsToRender.forEach(itemData => {
                 let itemDiv = document.createElement('div');
                 itemDiv.classList.add('case-item');
+                 // Apply explicit width based on calculation - helps consistency
+                // itemDiv.style.width = `${itemWidth}px`; // Optional: Force width if CSS media queries change it unexpectedly
+
                 if (itemData.rarity) {
                     itemDiv.classList.add(itemData.rarity);
                 }
@@ -391,30 +400,24 @@
             });
 
             caseItemsContainer.appendChild(fragment);
-
-            if (caseItemsContainer.children.length > 0) {
-                 caseItemsContainer.offsetHeight;
-                itemWidth = caseItemsContainer.children[0].offsetWidth;
-                 console.log("Item width calculated:", itemWidth);
-            }
             itemsGenerated = true;
         }
 
+
         // --- Показ модального окна (теперь для всех) ---
         function showWinModal(item) {
-            winItemTitle.textContent = item.display; // Устанавливаем текст заголовка
-            winItemTitle.style.color = getRarityColorHex(item.rarity); // Устанавливаем цвет заголовка
+            winItemTitle.textContent = item.display;
+            winItemTitle.style.color = getRarityColorHex(item.rarity);
 
-            // Управляем классами для рамки и спецэффекта
-            winModalContent.className = 'modal-content'; // Сбрасываем классы до базового
-            winModalContent.classList.add(item.rarity + '-win'); // Добавляем класс рарности для рамки
+            winModalContent.className = 'modal-content';
+            winModalContent.classList.add(item.rarity + '-win');
 
             if (item.special) {
-                winModalContent.classList.add('special-effect'); // Добавляем класс спецэффекта
+                winModalContent.classList.add('special-effect');
                 console.log("Special win effect added for:", item.display);
             }
 
-            winModal.style.display = "block"; // Показать модальное окно
+            winModal.style.display = "block";
         }
 
         // --- Закрытие модального окна ---
@@ -429,8 +432,19 @@
 
         // --- MAIN SPIN FUNCTION ---
         function openCase() {
+            // Recalculate itemWidth just in case, if items weren't ready before
+            if (itemWidth === 0 && itemsGenerated) {
+                 let currentItemWidth = caseItemsContainer.children.length > 0 ? caseItemsContainer.children[0].offsetWidth : 0;
+                 if (currentItemWidth > 0) {
+                     itemWidth = currentItemWidth;
+                     console.log("Item width re-calculated:", itemWidth);
+                 }
+            }
+
+
             if (isSpinning || !itemsGenerated || itemWidth === 0 || hasOpenedOnce) {
                 console.warn("Spin prevented: Conditions not met.", {isSpinning, itemsGenerated, itemWidth, hasOpenedOnce});
+                 if(itemWidth === 0) alert("Ошибка: Не удалось определить размеры элементов. Попробуйте обновить страницу.");
                 return;
             }
 
@@ -438,7 +452,6 @@
             isSpinning = true;
             openCaseButton.disabled = true;
             openCaseButton.textContent = "Крутится...";
-            // resultDisplay.textContent = ""; // Не нужно, т.к. скрыт
 
             const winningIndexInUniqueSet = Math.floor(Math.random() * numUniqueItems);
             const winningItem = config.items[winningIndexInUniqueSet];
@@ -461,15 +474,16 @@
                 targetItemIndex = (config.numberOfDuplicates - 1) * numUniqueItems + winningIndexInUniqueSet;
              }
 
+            // Use parentElement.offsetWidth for accurate container width including padding/borders
             const containerWidth = caseItemsContainer.parentElement.offsetWidth;
-            const centerOffset = (containerWidth / 2) - (itemWidth / 2);
-            let totalOffset = (targetItemIndex * itemWidth) - centerOffset;
+            const centerOffset = (containerWidth / 2) - (itemWidth / 2); // Use calculated itemWidth
+            let totalOffset = (targetItemIndex * itemWidth) - centerOffset; // Use calculated itemWidth
             const jitter = (Math.random() - 0.5) * (itemWidth * 0.1);
             totalOffset += jitter;
 
             const numSpins = config.minSpins + Math.floor(Math.random() * (config.maxSpins - config.minSpins + 1));
             const duration = config.spinDurationBase + numSpins * config.spinsMultiplier;
-            console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s, Target Index: ${targetItemIndex}`);
+            console.log(`Calculated Spins: ${numSpins}, Duration: ${duration.toFixed(2)}s, Target Index: ${targetItemIndex}, Offset: ${totalOffset}`);
 
             caseItemsContainer.style.transition = `transform ${duration}s cubic-bezier(0.15, 0.8, 0.15, 1)`;
             caseItemsContainer.style.transform = `translateX(-${totalOffset}px)`;
@@ -478,10 +492,7 @@
             setTimeout(() => {
                 isSpinning = false;
                 openCaseButton.textContent = "Кейс открыт!";
-
-                // Показываем модальное окно ВСЕГДА
                 showWinModal(winningItem);
-
                 console.log("Spin finished.");
             }, duration * 1000);
         }
@@ -489,23 +500,35 @@
         // Helper to get HEX color based on rarity (for text mostly)
         function getRarityColorHex(rarity) {
             switch (rarity) {
-                case 'common': return '#aaaaaa'; // Light grey
-                case 'uncommon': return '#88cc88'; // Light green
-                case 'rare': return '#5dade2'; // Brighter Blue
-                case 'epic': return '#af7ac5'; // Brighter Purple
-                case 'legendary': return '#f39c12'; // Gold/Orange
-                default: return '#333333'; // Default dark text
+                case 'common': return '#aaaaaa';
+                case 'uncommon': return '#88cc88';
+                case 'rare': return '#5dade2';
+                case 'epic': return '#af7ac5';
+                case 'legendary': return '#f39c12';
+                default: return '#333333';
             }
         }
 
         // --- Initialize ---
-        createItems();
+        // setupItems will calculate width based on current CSS
+        setupItems();
 
-         window.addEventListener('resize', () => {
-             if (caseItemsContainer.children.length > 0 && !isSpinning) {
-                 itemWidth = caseItemsContainer.children[0].offsetWidth;
-                 console.log("Item width recalculated on resize:", itemWidth);
-             }
+        // Optional: Recalculate on resize if the layout changes significantly
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+             // Debounce resize event to avoid excessive calculations
+             clearTimeout(resizeTimeout);
+             resizeTimeout = setTimeout(() => {
+                 console.log("Window resized, recalculating item width...");
+                 // Recalculate width on resize
+                 if (caseItemsContainer.children.length > 0 && !isSpinning) {
+                    itemWidth = caseItemsContainer.children[0].offsetWidth;
+                    console.log("Item width recalculated on resize:", itemWidth);
+                 } else if (!itemsGenerated) {
+                     // If items weren't generated yet, try generating them now
+                     setupItems();
+                 }
+             }, 250); // Wait 250ms after last resize event
          });
 
     </script>
