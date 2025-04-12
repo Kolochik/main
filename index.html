@@ -81,6 +81,23 @@
             transform: scale(0.98); /* Уменьшение при нажатии */
         }
 
+        /* Поддержка и маленькие шрифты */
+        .support-text {
+            font-size: 0.8em;
+            color: rgba(100, 255, 100, 0.8); /* Зеленый цвет для New! */
+            display: block; /* Чтобы располагался под кнопкой */
+            text-align: center;
+            margin-top: 3px;
+        }
+       .support-text-support {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.6); /* Зеленый цвет для New! */
+            display: block; /* Чтобы располагался под кнопкой */
+            text-align: center;
+            margin-top: 3px;
+        }
+
+
         /* --- Ссылки на Политику и Соглашение --- */
         .legal-links {
             text-align: center;
@@ -137,12 +154,24 @@
     <h1>Project MixVine</h1>
 
     <div class="menu-container">
+
+        <h2>Крупные проекты</h2>
+        <div class="menu-row">
+            <span class="menu-button">В разработке...</span>
+        </div>
+
+        <h2>Некрупные проекты</h2>
         <div class="menu-row">
             <a href="https://mixvineproject.github.io/case" class="menu-button">Бесплатный кейс</a>
-            <a href="https://t.me/projectmixvine" class="menu-button">Телеграмм канал проекта</a>
+            <a href="https://mixvineproject.github.io/random" class="menu-button">Рандомайзер<span class="support-text">New!</span></a>
+        </div>
+
+        <h2>Информация и поддержка</h2>
+        <div class="menu-row">
+            <a href="https://t.me/projectmixvine" class="menu-button">Телеграмм канал проекта<span class="support-text-support">Поддержка</span></a>
+            <a href="https://t.me/mixvinebot" class="menu-button">Телеграмм бот проекта<span class="support-text-support">Поддержка</span></a>
         </div>
         <div class="menu-row">
-            <a href="https://t.me/mixvinebot" class="menu-button">Телеграмм бот проекта</a>
             <a href="https://t.me/kqxsrZ" class="menu-button">Разработчик проекта</a>
         </div>
     </div>
@@ -152,10 +181,9 @@
         <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
     </div>
 
-   <footer>
-        <span>© 2024-2025 Project MixVine. Все права защищены.</span>
-        <br>
-       <span class="footer-version">ver. web3.1Global</span> <!-- Добавлена версия -->
+    <footer>
+        <span>© Project MIxVine 2024</span>
+        <span class="footer-version">ver. web2Global</span>
     </footer>
 
 </body>
