@@ -31,13 +31,38 @@
             padding-bottom: 75px; /* Оставляем место для контента и футера */
         }
 
+        /* --- Черная полоска сверху --- */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px; /* Высота полоски */
+            background-color: rgba(0, 0, 0, 0.3); /* Черный полупрозрачный */
+            z-index: 100; /* Чтобы перекрывать контент */
+        }
+
         /* --- Заголовок --- */
+        .header-container {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .header-container img {
+            width: 50px; /* Размер логотипа */
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 5px; /* Слегка закругляем края */
+        }
+
         h1 {
-            text-align: center;
+            text-align: left;
             color: #fff;
-            margin-top: 30px; /* Отступ сверху */
-            margin-bottom: 50px; /* Больше отступ снизу */
-            font-size: 3.5em; /* Большой шрифт */
+            margin: 0; /* Убираем стандартные отступы */
+            font-size: 2.0em; /* Уменьшенный размер */
             font-family: 'Arial Black', sans-serif; /* Пример красивого шрифта */
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
         }
@@ -49,6 +74,7 @@
             align-items: center; /* Центрирование по горизонтали */
             width: 100%;
             max-width: 600px; /* Максимальная ширина */
+            margin-top: 80px; /* Отступ от верхнего колонтитула */
         }
 
         .menu-row {
@@ -130,13 +156,15 @@
 
         /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3em; margin-bottom: 40px; }
+            h1 { font-size: 1.8em; margin-bottom: 0; }
+            .header-container img { width: 40px; height: 40px; }
             .menu-button { font-size: 1.2em; padding: 12px 25px; }
             .menu-row { margin-bottom: 20px; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 2.5em; margin-bottom: 30px; }
-            .menu-container { max-width: 90%; }
+            h1 { font-size: 1.5em; margin-bottom: 0; }
+            .header-container img { width: 30px; height: 30px; }
+            .menu-container { max-width: 90%; margin-top: 60px; }
             .menu-row { flex-direction: column; align-items: center; margin-bottom: 15px;} /* Вертикально */
             .menu-button {
                 font-size: 1em; padding: 10px 20px;
@@ -151,7 +179,13 @@
 </head>
 <body>
 
-    <h1>Project MixQZero</h1>
+    <div class="top-bar"></div>
+
+    <div class="header-container">
+        <img src="https://i.postimg.cc/s2yDfZKf/Picsart-25-04-23-11-46-48-965.png" alt="Логотип MixQZero">
+        <h1>Project MixQZero</h1>
+    </div>
+
 
     <div class="menu-container">
 
