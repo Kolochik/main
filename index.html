@@ -12,6 +12,12 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes headerBackgroundSlide {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* --- Основные стили --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -48,7 +54,14 @@
             align-items: center;
             position: absolute;
             top: 20px;
-            left: 20px;
+            left: 0; /* Растягиваем на всю ширину */
+            width: 100%; /* Растягиваем на всю ширину */
+            padding: 10px 20px; /* Отступы слева и справа */
+            box-sizing: border-box; /* Чтобы отступы не увеличивали ширину */
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Фон */
+            background-size: 200% 100%; /* Для анимации */
+            animation: headerBackgroundSlide 10s linear infinite; /* Анимация */
+            z-index: 99; /* Под полоской .top-bar, но над основным контентом */
         }
 
         .header-container img {
@@ -65,9 +78,9 @@
             font-size: 1.6em; /* Еще уменьшаем размер */
             font-family: 'Arial Black', sans-serif;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            padding: 5px 10px; /* Добавляем отступы для фона */
-            background-color: rgba(0, 0, 0, 0.4); /* Фон для текста */
-            border-radius: 5px; /* Скругляем углы фона */
+            /* padding: 5px 10px; Убрали, фон теперь у .header-container */
+            /* background-color: rgba(0, 0, 0, 0.4); Убрали, фон теперь у .header-container */
+            /* border-radius: 5px; Убрали, фон теперь у .header-container */
         }
 
         /* --- Меню (кнопки) --- */
