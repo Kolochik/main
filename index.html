@@ -12,12 +12,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes headerBackgroundSlide {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         /* --- Основные стили --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -54,19 +48,12 @@
             align-items: center;
             position: absolute;
             top: 20px;
-            left: 0; /* Растягиваем на всю ширину */
-            width: 100%; /* Растягиваем на всю ширину */
-            padding: 10px 20px; /* Отступы слева и справа */
-            box-sizing: border-box; /* Чтобы отступы не увеличивали ширину */
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Фон */
-            background-size: 200% 100%; /* Для анимации */
-            animation: headerBackgroundSlide 10s linear infinite; /* Анимация */
-            z-index: 99; /* Под полоской .top-bar, но над основным контентом */
+            left: 20px;
         }
 
         .header-container img {
-            width: 40px; /* Размер логотипа */
-            height: 40px;
+            width: 50px; /* Размер логотипа */
+            height: 50px;
             margin-right: 10px;
             border-radius: 5px; /* Слегка закругляем края */
         }
@@ -75,69 +62,67 @@
             text-align: left;
             color: #fff;
             margin: 0; /* Убираем стандартные отступы */
-            font-size: 1.6em; /* Еще уменьшаем размер */
-            font-family: 'Arial Black', sans-serif;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            /* padding: 5px 10px; Убрали, фон теперь у .header-container */
-            /* background-color: rgba(0, 0, 0, 0.4); Убрали, фон теперь у .header-container */
-            /* border-radius: 5px; Убрали, фон теперь у .header-container */
+            font-size: 2.0em; /* Уменьшенный размер */
+            font-family: 'Arial Black', sans-serif; /* Пример красивого шрифта */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
         }
 
         /* --- Меню (кнопки) --- */
         .menu-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; /* Flexbox для выравнивания */
+            flex-direction: column; /* Вертикальное расположение */
+            align-items: center; /* Центрирование по горизонтали */
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Максимальная ширина */
             margin-top: 80px; /* Отступ от верхнего колонтитула */
         }
 
         .menu-row {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-around; /* Распределение кнопок по строке */
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 25px; /* Отступ между рядами */
         }
         .menu-button {
             display: block;
-            background-color: #c89600;
-            color: #333;
+            background-color: #c89600; /* Золотой */
+            color: #333; /* Темный текст */
             padding: 15px 30px;
             border: none;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 1.3em;
+            font-size: 1.3em; /* Большой шрифт */
             font-weight: bold;
             text-align: center;
             transition: background-color 0.3s ease, transform 0.1s ease;
             box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-            width: 45%;
+            width: 45%; /* Примерно половина ширины ряда */
             box-sizing: border-box;
         }
         .menu-button:hover {
-            background-color: #b48a00;
-            transform: scale(1.05);
+            background-color: #b48a00; /* Затемнение при наведении */
+            transform: scale(1.05); /* Небольшое увеличение */
         }
         .menu-button:active {
-            transform: scale(0.98);
+            transform: scale(0.98); /* Уменьшение при нажатии */
         }
 
         /* Поддержка и маленькие шрифты */
         .support-text {
             font-size: 0.8em;
-            color: rgba(100, 255, 100, 0.8);
-            display: block;
+            color: rgba(100, 255, 100, 0.8); /* Зеленый цвет для New! */
+            display: block; /* Чтобы располагался под кнопкой */
             text-align: center;
             margin-top: 3px;
         }
        .support-text-support {
             font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.6);
-            display: block;
+            color: rgba(255, 255, 255, 0.6); /* Зеленый цвет для New! */
+            display: block; /* Чтобы располагался под кнопкой */
             text-align: center;
             margin-top: 3px;
         }
+
 
         /* --- Ссылки на Политику и Соглашение --- */
         .legal-links {
@@ -168,21 +153,22 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
+
         /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            h1 { font-size: 1.4em; } /* Еще меньше на маленьких экранах */
-            .header-container img { width: 35px; height: 35px; }
+            h1 { font-size: 1.8em; margin-bottom: 0; }
+            .header-container img { width: 40px; height: 40px; }
             .menu-button { font-size: 1.2em; padding: 12px 25px; }
             .menu-row { margin-bottom: 20px; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 1.2em; } /* Самый маленький размер на телефонах */
+            h1 { font-size: 1.5em; margin-bottom: 0; }
             .header-container img { width: 30px; height: 30px; }
-            .menu-container { margin-top: 60px; }
-            .menu-row { flex-direction: column; align-items: center; margin-bottom: 15px;}
+            .menu-container { max-width: 90%; margin-top: 60px; }
+            .menu-row { flex-direction: column; align-items: center; margin-bottom: 15px;} /* Вертикально */
             .menu-button {
                 font-size: 1em; padding: 10px 20px;
-                width: 80%;
+                width: 80%; /* Полная ширина на телефоне */
                 margin-bottom: 10px;
             }
              .legal-links { font-size: 12px; }
@@ -199,6 +185,7 @@
         <img src="https://i.postimg.cc/s2yDfZKf/Picsart-25-04-23-11-46-48-965.png" alt="Логотип MixQZero">
         <h1>Project MixQZero</h1>
     </div>
+
 
     <div class="menu-container">
 
@@ -232,7 +219,7 @@
         <span>© 2024-2025 Project MixQZero. Все права защищены.</span>
         <br>
         <a href="https://mixqzero.github.io/politika" target="_blank">Политика конфиденциальности</a> | <a href="https://mixqzero.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
-        <span class="footer-version">ver. web4Global</span>
+        <span class="footer-version">ver. web4Global</span> <!-- Добавлена версия -->
     </footer>
 
 </body>
